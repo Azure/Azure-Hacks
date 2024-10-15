@@ -28,9 +28,10 @@
    - Assigned Roles
    - Assigned Licenses
    - User Type
-<img width="1190" alt="image" src="https://github.com/user-attachments/assets/a324dbb2-f882-439c-b986-d4cf87c9fc88">
 
-<img width="989" alt="image" src="https://github.com/user-attachments/assets/fef763ea-d1a6-414b-8525-f8ceb60ee2ba">
+   ![view1](./images/view1.png)
+
+   ![view2](./images/view2.png)
 
 </details>
 
