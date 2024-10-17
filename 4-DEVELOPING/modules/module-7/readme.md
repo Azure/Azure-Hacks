@@ -1,4 +1,4 @@
-# Challenge 07 -  Enable Feature Flags, Triggering Errors, Implementing resilence and observing outcome  
+# Challenge 07 -  Enable Feature Flags, Triggering Errors, Implementing resilience and observing outcome  
 
 **[Home](../../Readme.md)** - [Next Challenge >](../module-8/)
 
@@ -7,12 +7,12 @@ In the last section we were able to enable full end to end monitoring across our
 
 > **Note** The applications is using a framework called polly to inject faults and implement application level resilence patterns.
 > 
-> Polly's fault injection allows you to simulate faults in your application to test its resilience and error-handling capabilities. This is particularly useful for testing how your application behaves under failure conditions without actually causing real failures. The application is built to reach out to **Azure App configuration** and enable fault injection on demand.  
+> Polly's fault injection allows you to simulate faults in your application to test it's resilience and error-handling capabilities. This is particularly useful for testing how your application behaves under failure conditions without actually causing real failures. The application is built to reach out to **Azure App configuration** and enable fault injection on demand.  
 
 ## Description 
 
-Deploy **Azure App Configuration** service. The microservices use this service to store feature flags. This enable the applications and operator to turn on features in the services without requiring and application change or restart. 
-> Note: Due to a special character limitation for `:` in the UI and CLI its only possible to create these feature entries via Bicep.  We have supplied a bicep file with the required configuration   <img src="img/feature_flags.png" alt="workload"   style="display: block; margin: 0 auto;" />
+Deploy **Azure App Configuration** service. The microservices use this service to store feature flags. This enable the applications and operator to turn on features in the services without requiring a application change or restart. 
+> Note: Due to a special character limitation for `:` in the UI and CLI it's only possible to create these feature entries via Bicep.  We have supplied a bicep file with the required configuration   <img src="img/feature_flags.png" alt="workload"   style="display: block; margin: 0 auto;" />
 
 In our case we will use **App Configuration** to 1) inject faults using this feature and 2) enabled resiliency patterns to mitigate these faults. 
 
@@ -27,23 +27,24 @@ The application is configured to use the following feature flags.
 | Contonance.WebPortal.Server  | InjectLatencyFaults             | Inject latency faults on Contonance.WebPortal.Server for HTTP calls to Contonance.Backend |
 | Contonance.Backend           | InjectRateLimitingFaults        | Inject rate limiting faults on Contonance.Backend for HTTP calls to EnterpriseWarehouse.Backend |
 
-For purpose of this task it recommended to deploy using Bicep
+For purpose of this task it is recommended to deploy using Bicep deployment file. This can be found [here](appconfig.bicep).
 Create the App configuration using the supplied bicep [bicep](appconfig.bicep)
 
-For this tasks we will inject faults between the Portal and Backend and then implement resiliency patterns to mitigate these faults. the faults will be injected on the GetAllRepairReports interface 
+For this task we will inject faults between the Portal and Backend and then implement resiliency patterns to mitigate these faults. The faults will be injected on the GetAllRepairReports interface.
+
  <img src="img/faultinjection.png" alt="workload"   style="display: block; margin: 0 auto;" />
 
 
 ### Tasks
 1. Deploy the App configuration service. Use the Bicep approach. 
-2. Review the Docker files for all 2 application and the App Configuration Connection String.  `AppConfiguration__ConnectionString`.  
-3. For this exercise its only required to set the `AppConfiguration__ConnectionString` on the WebPortal container
+2. Review the Docker files for all 2 applications and the App Configuration Connection String.  `AppConfiguration__ConnectionString`.  
+3. For this exercise it's only required to set the `AppConfiguration__ConnectionString` on the WebPortal container
     * [WebPortal](../../src/Contonance.WebPortal/Server/Dockerfile) 
-4. Once the environment variable is set and container restarted. Verify the featues flags are updated by 
+4. Once the environment variable is set and container restarted, verify the featues flags are updated by 
    1. Turning on `Contonance.WebPortal.Server:InjectLatencyFaults`in Azure portal
    2. Check webportal logs. You should see a message indicating feature flag was picked up
-   3. Call the Webportal to list repairs. it should take longer to load now. At least the majority of the calls. 
-      1. Additionally visible in Application insights
+   3. Call the Webportal to list repairs page multiple time(refresh page). For the majority of page calls it should take longer to load. 
+      1. Additionally this increased latency is visible in Application insights
    4. Once verified, disable the feature again. We will enable it again during a load test
    5. These resilience strategies and faults are controlled with App Configuration in [ContonanceBackendClient](../../src/Contonance.WebPortal/Server/Clients/ContonanceBackendClient.cs#30)
 5. Start a loadtest against the API. You can use the same load test from the previous exercise. Where we defined a baseline in the last [lab](../module-6/challenge-6.md) 
@@ -120,8 +121,8 @@ The fault injection and  resilience strategies is p feature flags use the polly 
 - [ ] **Azure App Configuration** service deployed.
 - [ ] Review Polly code feature flags in [ContonanceBackendClient ](../../src/Contonance.WebPortal/Server/Clients/ContonanceBackendClient.cs#30)
 - [ ] Feature flags set on **Azure App Configuration** service with Microservices dynamically enabling features. Verfied in logs and application behavior
-- [ ] Fault injection feature flag set and resiliency patterns observed. Either manually or via Load Test.
+- [ ] Fault injection feature flag set and resiliency patterns observed. These patterns can be observed either manually in the Web portal or via Load Test.
 
 ## Learning check point 
-  - [ ]  Our fully configured application is deployed on an serverless container platform  and monitored E2E
-  - [ ]  We have dynamically enabled features on our application and shown how to implement resiliency patterns that improve the availablity of our application
+  - [ ]  Our fully configured application is deployed on a serverless container platform  and monitored E2E
+  - [ ]  We have dynamically enabled features on our application and shown how to implement resiliency patterns that improve the availability of our application

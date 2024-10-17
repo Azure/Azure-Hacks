@@ -59,5 +59,5 @@ Baselines help to determine the current efficiency state of your application and
 - [ ] Bonus: run the test from a different region. does it make a difference to latency
 
 ## Learning check point 
-  - [ ]  Our fully configured application is deployed on an serverless container platform  and monitored E2E
+  - [ ]  Our fully configured application is deployed on a serverless container platform  and monitored E2E
   - [ ]  We have defined a baseline performance that can be used as a reference for any future changes 

@@ -9,11 +9,13 @@ In a previous challenge, we updated  prepare our developement environment and cr
 ## Description
 
 - Provision an **Azure Container Registry**(ACR) to push your images into it. 
-* First we need to build the application locally.  Theres 3 applications that need to built
+* First we need to build the application.  Theres 3 applications that need to built
   * Contonance.Backend `acacontonancebackend:latest` found under Contonance.Backend/Dockerfile
   * EnterpriseWarehouse.Backend: `acawarehouse:latest` found under EnterpriseWarehouse.Backend/Dockerfil
   * Contonance.WebPortal `acawebportal:latest` found under Contonance.WebPortal/Server/Dockerfile 
-- Build images and push your local Docker image to your **Azure Container Registry**.
+- For this task. To avoid local docker build issues and dependencies. It is **strongly** recommended to use `az acr build`. 
+  - This is feature pushes to code to ACR to be build remotely and simplifies the build process for the lab
+  - Instead of performing local builds. Investigate using `az acr build ` to let ACR build the image instead  [acr build](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-quickstart-task-cli)
 > **Note**: As ACR is based on a globally available FQDN ensure that ensure you pick a unique name for you ACR
 > 
 > **Note**: For production environments should use an Infrastructure as Code language (Azure CLI, Bicep, Terraform, etc) to provision your Azure services. For these tasks its fine to use Azure Portal
@@ -40,7 +42,8 @@ In a previous challenge, we updated  prepare our developement environment and cr
 
 ## Success Criteria 
 - Validate that you can create an **Azure Container Registry**(ACR) `az acr list -o table`
-- Validate that you can push your local Docker image to the **Azure Container Registry** `az acr repository list -n $name`
+- Validate that you can build images and push to the **Azure Container Registry** `az acr repository list -n $name`
+- Built using `az acr build`
 - Valaidate the 3 images are present in **Azure Container Registry**.
 
 

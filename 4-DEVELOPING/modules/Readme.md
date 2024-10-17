@@ -25,7 +25,7 @@ The Azure hack is intended to teach how to host, operate, and run microservices 
 - Challenge 4: **[Enabling Monitoring ](modules/module-5/readme.md)**
   - Enabling application insights. 
   - Identify the tracing and performance.  
-  - Availablity and health checks
+  - availability and health checks
   - 30-45 mins
 - Challenge 5: **[ Bring the things together ](modules/module-4/readme.md)**
   - Deploying the built Application to Azure. 
@@ -48,7 +48,7 @@ The Azure hack is intended to teach how to host, operate, and run microservices 
   - Perform traffic spliting across revisions with Container apps 
   - 30 mins
 - Challenge 9: **[ Front Door integration](module-/readme.md)**
-  - Enable global availablity of application and application acceleration 
+  - Enable global availability of application and application acceleration 
   - 20 mins
  
 

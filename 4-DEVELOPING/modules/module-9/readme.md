@@ -5,7 +5,7 @@
 # Introduction
 Azure **Front Door** is a scalable and secure entry point for fast delivery of your ACA hosted applications. By placing Azure **Front Door** in front of Azure Container Apps (ACA), you can enhance the performance, security, and reliability of your applications. Azure **Front Door** provides features such as global load balancing, SSL offloading, and application acceleration, which can significantly improve the user experience.
 ## Description 
-In this challenge, you will configure Azure **Front Door** to act as the entry point for an application hosted on Azure Container Apps. The goal is to leverage Azure **Front Door**'s capabilities to enhance the performance and security of your application. You will:
+In this challenge, you will configure Azure **Front Door** to act as the entry point for a application hosted on Azure Container Apps. The goal is to leverage Azure **Front Door**'s capabilities to enhance the performance and security of your application. You will:
 
 * Create an Azure **Front Door** instance.
 * Configure the **Front Door** to route traffic to your Azure Container Apps.

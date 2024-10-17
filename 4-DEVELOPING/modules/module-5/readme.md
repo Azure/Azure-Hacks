@@ -15,6 +15,36 @@ At a High level what we want to accomplish. Configure the WebPortal to communica
 
  <img src="img/architecture.png" alt="workload"  style="display: block; margin: 0 auto;" />
 
+ 
+> **Important**. It is **strongly** recommended to use  azure CLI to update the environment variables on your container apps. Using the Azure portal is convenient but is error prune and time consuming should the environment variables needs to be updated repeatedly.  The following is a example script that can be used to update environment variables on the 3 applications.
+> 
+> This cli script can be repeated executed to apply changes to the environment variables 
+
+ ```bash
+
+## Set the webportal env variables 
+  az containerapp update \
+    --name "contonance-web-portal" \
+    --resource-group "$RESOURCE_GROUP" \
+    --set-env-vars \
+      EventHub__EventHubConnectionString="$event_hub_connection_string" 
+
+## Set the backend env variables 
+  az containerapp update \
+    --name "contonance-backend" \
+    --resource-group "$RESOURCE_GROUP" \
+    --set-env-vars \
+      EventHub__EventHubConnectionString="$event_hub_connection_string" \
+      EventHub__BlobConnectionString="$blob_connection_string"
+
+## Set the backend env variables 
+  az containerapp update \
+    --name "enterprise-warehouse-backend" \
+    --resource-group "$RESOURCE_GROUP" \
+    --set-env-vars \
+      ConnectionStrings__CosmosApi="$ConnectionStrings__CosmosApi"
+
+```
 
 ### 1: Configure communication between Frontend and Backend 
 To enable communication between frontend and backend. 
@@ -28,14 +58,14 @@ In this task, you will create a Hub namespace and a Event Hub to enable asynchro
 * Create a authorization rule. This allows clients to read and send data. Also known as a shared access policy. A policy with Read and Send is sufficent.
 
 After the **Event Hub** is created and the connection access policy is defined the WebPortal/frontend application's environment variables can be set. 
-* EventHub__EventHubName=
 * EventHub__EventHubConnectionString=
-* CONTONANCE_BACKEND_URL this is the private address of the backend service
-* See the Webportals [Dockerfile](../../src/Contonance.WebPortal/Server/Dockerfile) for details on the environment variables or search the code 
-* CONTONANCE_BACKEND_URL needs to be set. This would be the name of the backend container app. By default its set to `CONTONANCE_BACKEND_URL=http://contonance-backend/`. If the container app is already called `contonance-backend` then there is no need to modify this. 
-* Take care of the ingress port of `contonance-backend` app. The backend port is 8080 but ingress should be 80.
+* See the Webportals [Dockerfile](../../src/Contonance.WebPortal/Server/Dockerfile) for details on the environment variables or search the code.
+* Take care of the ingress is http of `contonance-backend` app. The backend port is 8080. 
+* **Important** Ensure  that `Insecure connections`is enabled for ingress. 
+ <img src="img/backendingress.png" alt="workload"  style="display: block; margin: 0 auto;" />
+
 ### 2: Backend and Event Hub
- <img src="img/backendtowarehouse.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" />
+ <img src="img/backendtowarehouse.png" alt="workload"   style="display: block; margin: 0 auto;" />
 
 The backend Microservice performs two Actions 
 * Processes new Repair task from **Event hub** and save to warehouse service 
@@ -47,9 +77,16 @@ The backend Microservice performs two Actions
 
 ### 3 Warehouse: Connecting to Cosmos
 The warehouse service communicates with a cosmos DB. The Warehouse microservice exposes an API `http://$containerApp/api/message/receive`. This api will save a new entry in the cosmos db. 
-* We need to create a new cosmos Account and database based on NoSQL 
+* We need to create a new cosmos Account and database based on NoSQL. This can be done in the `Cosmos DB account ´-> Data Explorer` menu item
 * The warehouse expects a Cosmos db called `repair_parts` and a schema called `orders`. See schema screenshot.
-* The orders schema will have a partitionKey of `repairPartId`
+* The orders schema will have a partitionKey of `repairPartId`. The creation process in the portal should look like the following.
+  * database id = repair_parts
+  * container id = orders 
+  * partition id = repairPartId
+  * Container Throughput = manual 
+  * Container required RU/s = 400 
+ <img src="img/cosmosschema2.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" />
+* After creation it should look like this in the data explorer sections
   <img src="img/createComosSchema.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" />
 * Configure the warehouse service to connect to the DB. See [Dockerfile](../../src/EnterpriseWarehouse.Backend/Dockerfile) for the environment variable to set
 ## Hints 
@@ -58,11 +95,11 @@ The warehouse service communicates with a cosmos DB. The Warehouse microservice 
   <summary> Open hints </summary>
 
 ### 1 WebPortal  -> Backend:  Create a EH namespace and Eventhub with CLI 
-* Create an [Event Hub Namespace ](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create#create-an-event-hubs-namespace) in the portal. And create its corrosponding [Event Hub](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create#create-an-event-hub). The name of the eventhub created will be the value of `EventHub__EventHubName` for the WebPortal [Dockerfile](../../src/Contonance.WebPortal/Server/Dockerfile)
-* Once created, create an authorization rule. This will be passed as the `EventHub__EventHubConnectionString` environment variable. [Dockerfile](../../src/Contonance.WebPortal/Server/Dockerfile)
-* Set the environment variables can be added 
+* Create an [Event Hub Namespace ](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create#create-an-event-hubs-namespace) in the portal. And create its corrosponding [Event Hub](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create#create-an-event-hub). The name of the eventhub created should be **orders**
+* Once created, create an authorization rule. This will be passed as the **`EventHub__EventHubConnectionString`** environment variable. [Dockerfile](../../src/Contonance.WebPortal/Server/Dockerfile)
+ 
 * https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-* Getting a Eventhub [Connection String](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string)
+* Getting a Eventhub [Connection String](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string). This will be passed as the **`EventHub__EventHubConnectionString`**  
 #### Example EH script 
 Exaample script to create the Eventhub resources and access configurations.
 ```bash 
@@ -77,7 +114,7 @@ az eventhubs eventhub authorization-rule keys list --resource-group $RESOURCE_GR
 
 ```
 ### 2 Backend  -> Warehouse: Connect to EH and  warehouse
-* Configure the Backend application.Need to be set `ApplicationInsights__ConnectionString` and `EventHub__EventHubName`(default is `orders`) 
+* Configure the Backend application to connected to eventhub. Needs to be set `EventHub__EventHubConnectionString` 
 * Use the same Auth rule as before for the connections String
 * See backend [Dockerfile](../../src/Contonance.Backend/Dockerfile) for more details
 * Create a Storage account get the connection string and set the environment variable on the Backend container app`EventHub__BlobConnectionString`. This will store the checkpoint
@@ -96,14 +133,16 @@ az storage account show-connection-string --name $STORAGE_ACCOUNT_NAME --resourc
 az storage account update     --name sa  --resource-group rg  --allow-shared-key-access false
 ```
 ### 3  Warehouse - Comos DB 
-* create a new [cosmos db](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-portal). Nos SQL 
+* create a new [cosmos db](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-portal). NoSQL
+ 
 *  [ComosDB  quickstart](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/manage-with-cli#create-an-azure-cosmos-db-account)
-*  <img src="img/cosmoscreate.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" />
+* we recommend for the lab to created **provisioned throughput** mode
+*  <img src="img/crestecosmos.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" />
   
 #### 2.1 Deploy a Cosmos DB 
 We need to create a highly scalable Database to save the applications data and records. 
 > **Important:**  When creating a cosmos DB, it requires a minimun for **400** throughput units. If you define less than **400** then the following error will occur 
-<img src="img/cosmossDB400.png" alt="workload" height="300"  style="display: block; margin: 0 auto;" /> 
+<img src="img/cosmossDB400.jpeg" alt="workload" style="display: block; margin: 0 auto;" /> 
 * Create a SQL-based Azure Cosmos DB account.
   * `az cosmosdb create`
 * Create a database within the Cosmos DB account.
@@ -129,19 +168,16 @@ To assist with the environment variable configuration of containers. The followi
 
 | contonance-web-portal                     | Description                                                                 |
 |-------------------------------------------|-----------------------------------------------------------------------------|
-| `EventHub__EventHubName`                  | The name of the Event Hub. Default `orders`                                                  |
 | `EventHub__EventHubConnectionString`      | The connection string for the Event Hub authorization rule.                 |
-| `CONTONANCE_BACKEND_URL`                  | The Backend API. by default `http://contonance-backend/`               |
 
 
 | contonance-backend                     | Description                                                                 |
 |-------------------------------------------|-----------------------------------------------------------------------------|
-| `EventHub__EventHubName`                  | The name of the Event Hub. Default `orders`                                                  |
 | `EventHub__EventHubConnectionString`      | The connection string for the Event Hub authorization rule.                 |
 | `EventHub__BlobConnectionString`          | The connection string for the Storage account to store the checkpoint.      |
-| `ENTERPRISE_WAREHOUSE_BACKEND_URL`          | The warehoure API. default http://enterprise-warehouse-backend/api/message/receive |
 
-| contonance-backend                     | Description                                                                 |
+
+| enterprise-warehouse-backend                     | Description                                                                 |
 |-------------------------------------------|-----------------------------------------------------------------------------|
 | `ConnectionStrings__CosmosApi`                  | The ComosDB connection String                                                  |
 

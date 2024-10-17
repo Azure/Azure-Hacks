@@ -37,7 +37,7 @@ We will also show you how you can use **Azure Monitor with Application Insights*
 - Challenge 4: **[Enabling Monitoring ](modules/module-5/readme.md)**
   - Enabling application insights. 
   - Identify the tracing and performance.  
-  - Availablity and health checks
+  - availability and health checks
   - 30-45 mins
 - Challenge 5: **[ Bring the things together ](modules/module-4/readme.md)**
   - Deploying the built Application to Azure. 
@@ -60,6 +60,6 @@ We will also show you how you can use **Azure Monitor with Application Insights*
   - Perform traffic spliting across revisions with Container apps 
   - 30 mins
 - Challenge 9: **[ Front Door integration](module-/readme.md)**
-  - Enable global availablity of application and application acceleration 
+  - Enable global availability of application and application acceleration 
   - 20 mins
  
