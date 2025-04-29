@@ -1,4 +1,4 @@
-# Microsoft Cloud Academy - Bosch Training Days (Security Analyst)
+# Microsoft Cloud Academy - Bosch Training Days
 
 ## ℹ️ Introduction
 
@@ -25,7 +25,6 @@ Welcome to the Bosch Training Days! Over the next three days, we’ll dive into 
 - Dive into Entra ID and Role-Based Access Control (RBAC)
 - Focus on Privileged Identity Management (PIM)
 - Deploy and architect a new N-tier Application
-
 
 ## 🎬 Getting started
 
