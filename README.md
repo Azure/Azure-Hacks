@@ -1,4 +1,4 @@
-# Microsoft Cloud Academy - Bosch Training Days
+# Microsoft Cloud Academy - Bosch Training Days (Security Analyst)
 
 ## ℹ️ Introduction
 
