@@ -36,16 +36,15 @@ Welcome to the Bosch Training Days! Over the next three days, we’ll dive into 
 
 Installed fixed versions of the following tools:
 
-- Powershell 7.2.24
-- Winget v1.9.25200
-- az CLI Version 2.69.0
-- VS Code with HashiCorp Terraform extension v2.34.3 installed
-- Git version 2.48.1
-- Terraform 1.5.7
-- Azd 1.12.0
-- Dubectl v1.32.2
-- Kubctl Client Version: v1.31.4
-- Open SSL
+- [Powershell 7.2.24](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5)
+- [Winget v1.9.25200](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
+- [az CLI Version 2.69.0](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [VS Code with HashiCorp Terraform extension v2.34.3 installed](https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform)
+- [Git version 2.48.1](https://git-scm.com/downloads/win)
+- [Terraform 1.5.7](https://developer.hashicorp.com/terraform/install)
+- [Azd 1.12.0](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-windows)
+- [Kubctl Client Version: v1.31.4](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
+- Open SSL (should be installed per default)
 
 ### 🧑‍🏫/🧑‍🔬 Chapters
 

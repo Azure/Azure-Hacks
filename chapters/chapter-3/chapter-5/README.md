@@ -3,6 +3,7 @@
 ## Organizing Resources into Subnets
 
 We created our VNET with 4 different subnets:
+
 * **default** ``10.0.0.0/24``
 * **api** ``10.0.1.0/24``
 * **database** ``10.0.3.0/24``
@@ -14,7 +15,7 @@ We will start with the Application API ( ``app-api-`` resource ).
 
 ## TASK 1: Web API -> ``api`` Subnet
 
-- Go to the **Networking** settings of the Web API
+* Go to the **Networking** settings of the Web API
 
 <details close>
 <summary>💡 Hint: How-to 1: Find Networking settings of the API</summary>
@@ -28,7 +29,7 @@ Open the Networking section and under the tab "Outbound traffic configuration" f
 
 </details>
 
-- Configure Virtual Network Integration
+* Configure Virtual Network Integration
 
 <details close>
 <summary>💡 Hint: How-to 2: Find Networking settings of the API</summary>
@@ -47,9 +48,9 @@ Connect the API with the following configuration:
 * **Virtual Network:** ``\<VNET created in the previeous exercise\>``
 * **Subnet:** ``api``
 
- ## Success criteria
+## Success criteria
 
-- You have successfully integrated the Web App API into the VNET.
+* You have successfully integrated the Web App API into the VNET.
 
 ![image](../image/10_vnet_integration.png)
 
@@ -57,7 +58,7 @@ Connect the API with the following configuration:
 
 Test the connection by browsing TODO items on the website
 
-- Browse the application web site
+* Browse the application web site
 
 Go to the application website and click on the website URL
 
@@ -65,8 +66,8 @@ Go to the application website and click on the website URL
 
 ## Success Criteria 🎉
 
-- 🎊 **Congratulations!** You have successfully re-established a connection to the database through a private endpoint.
-- ✅ **TODO items are now loading again**, confirming that a private connection between the Web API and the database is ensured.
+* 🎊 **Congratulations!** You have successfully re-established a connection to the database through a private endpoint.
+* ✅ **TODO items are now loading again**, confirming that a private connection between the Web API and the database is ensured.
 
 ## 💡 Learning Checkpoint - DNS Resolution
 
@@ -150,4 +151,4 @@ In this checkpoint, you will update the architecture diagram to include the netw
 [SOLUTION EXAMPLE - ARCHITECTURE IMAGE](solutions/00_solution_template.png)
 
 
- **[< Chapter 4 - Network Architecture](../chapter-4/README.md) | [next Chapter 6 - Azure Key Vault - RBAC Permissions >](../chapter-6/README.md) | [solutions](solutions/README.md)** |
+ **[< Chapter 4 - Network Architecture](../chapter-4/README.md) | [next Chapter 6 - Azure Key Vault - RBAC Permissions >](../chapter-6/README.md) | [solutions](solutions/README.md)**

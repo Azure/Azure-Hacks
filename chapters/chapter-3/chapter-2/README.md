@@ -1,23 +1,21 @@
 # Chapter 2 - Deploy the resources using the blueprint
 
-### Prerequisites
-> This template will create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have contributor role to the Azure subscription.
+## Prerequisites
 
+This template will create infrastructure and deploy code to Azure.
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
 
 - [Azure Developer CLI](https://aka.ms/azd-install)
 - [Python (3.8+)](https://www.python.org/downloads/) - for the API backend
 - [Node.js with npm (18.17.1+)](https://nodejs.org/) - for the Web frontend
-- [Terraform CLI](https://aka.ms/azure-dev/terraform-install)
-    - Requires the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
+- [Terraform CLI](https://aka.ms/azure-dev/terraform-install) - Requires the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
 
 ### Quickstart
-To learn how to get started with any template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-python) with this template(`Azure-Samples/todo-python-mongo-terraform`).
+
+To learn how to get started with any template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-python) with this template [Azure-Samples/todo-python-mongo-terraform](https://github.com/Azure-Samples/todo-python-mongo-terraform)
 
 ## Task 1 - Initialize the environment
-
-- Initialize the environment
 
 Run the following Terminal Command in the directory
 
@@ -48,10 +46,11 @@ Navigate to the **\infra** folder and open the **main.tf** file. This file defin
 ### Examine the Application Code
 
 The application code for the API and web components can be found in the following directories:
+
 - **API**: `src\api`
 - **Web**: `src\web`
 
- ## Success criteria
+## Success criteria
 
 - You have successfully setup the project and reviewed the infrastructure as TerraForm code.
 
@@ -123,7 +122,7 @@ Deploying services (azd deploy)
 
 When the deployment of the Web Application and API is finished you will see the endpoints to both resources.
 
- - Use the second endpoint ``https://<WEB_URL>.azurewebsites.net/`` from your terminal output to access your application.
+- Use the second endpoint ``https://<WEB_URL>.azurewebsites.net/`` from your terminal output to access your application.
 
 ```azd
 Deploying services (azd deploy)

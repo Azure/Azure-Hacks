@@ -18,14 +18,15 @@ Once users enter TODO items, these need to be stored. We'll use [**Azure Cosmos 
 
 In the later tasks, we will focus on the connectivity between the deployed resources and enhance the architecture with additional networking resources.
 
-💡 **Learning Resources**: 
+💡 **Learning Resources**
+
 - [Azure networking services overview](https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview)
 - [Azure Networking Fundamentals Documentation | Microsoft Learn](https://learn.microsoft.com/en-us/azure/networking/fundamentals/)
-
 
 ### Additional Components
 
 Furthermore, you will also need:
+
 - **Monitoring:** Implement monitoring solutions to track the performance and health of your application.
 - **Security:** Incorporate security measures to protect your application and data.
 

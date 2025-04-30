@@ -18,7 +18,7 @@ Up to this point, we have used Azure Developer CLI and Terraform to deploy the n
 
 ## Task 2 - Securing Resources and Disabling Public Access
 
-- Disable public access for the ``CosmosDB database``.
+Disable public access for the ``CosmosDB database``.
 
 <details close>
 <summary>💡 Hint: How-to</summary>
@@ -33,15 +33,16 @@ Open the Networking section and set "Public network access" to "disabled". Click
 </details>
 
 ### Please Note:
+
 The following process may take a few minutes to complete.
 
 ![image](../image/07a_disable_public_access.png)
 
-### Task 3 - Test the connection
+## Task 3 - Test the connection
 
 Test the connection by browsing TODO items on the website
 
-- Browse the application web site
+* Browse the application web site
 
 Go to the application website and click on the website URL
 
@@ -53,15 +54,16 @@ Loading List Items...
 > [!CAUTION]
 > **Important**: You should not be able to browse the TODO items. As public access was disabled in the previous step, the Web API cannot establish a connection to the CosmosDB database.
 
-As we disabled the **public access** to the database, the TODO items were not loading, causing the website to remain stuck on the loading screen. 
+As we disabled the **public access** to the database, the TODO items were not loading, causing the website to remain stuck on the loading screen.
 We need to re-establish the database connection. We will create a private link for this.
 
 ## Task 4 - Establish a private link between the Database and Web API
+
 Secure the resources & ensure the connection to the Database through Private Links
 
 ### Task 4 a - Create a private endpoint to the CosmosDB Database
 
-- Create a private endpoint to the MongoDB database
+* Create a private endpoint to the MongoDB database
 
 <details close>
 <summary>💡 Hint: How-to 1: Find Networking settings of the cosmosDB</summary>
@@ -121,4 +123,4 @@ Create the *private endpoint resource*.
 
 For more information on managing virtual networks in Azure, refer to the official [Azure Virtual Network Documentation](https://docs.microsoft.com/en-us/azure/virtual-network/).
 
- **[< back](../chapter-3/README.md) | [next chapter 5 - Network Architecture - Secure the resources >](../chapter-5/README.md) | [solutions](solutions/README.md)** |
+ **[< back](../chapter-3/README.md) | [next chapter 5 - Network Architecture - Secure the resources >](../chapter-5/README.md) | [solutions](solutions/README.md)**

@@ -1,6 +1,6 @@
 # Chapter 1 - Select an Architecture
 
-### Selecting a Template
+## Selecting a Template
 
 In the following task, you need to choose a template matching the requirements.
 
@@ -17,19 +17,16 @@ The application should utilize the following Azure resources:
 - [**Azure Monitor**](https://docs.microsoft.com/azure/azure-monitor/) for monitoring and logging.
 - [**Azure Key Vault**](https://docs.microsoft.com/azure/key-vault/) for securing secrets.
 
-<details close>
-<summary>Hint: Template</summary>
-<br>
-
-Use the "React Web App with Python API and MongoDB - Terraform" Template
-
-</details>
+> [!TIP]
+>
+> Recommended Template
+> Use the "React Web App with Python API and MongoDB - Terraform" -> [Template](https://github.com/Azure-Samples/todo-python-mongo-terraform)
 
 ## 💡 Architecture Center Examples - Web App Deployment
 
 - [Basic Web App](https://learn.microsoft.com/en-us/azure/architecture/web-apps/app-service/architectures/basic-web-app)
 - [Highly available multi-region web application](https://learn.microsoft.com/en-us/azure/architecture/web-apps/app-service/architectures/multi-region)
-- Architecture Hack focuses on implementation within a primary region. Further focus on multi-region availability is covered in the [RELIABILITY](../3-RELIABILITY/README.md) HACK.
+- Architecture Hack focuses on implementation within a primary region. Further focus on multi-region availability is covered in the  RELIABILITY HACK.
 
 ## Success Criteria 🎉
 

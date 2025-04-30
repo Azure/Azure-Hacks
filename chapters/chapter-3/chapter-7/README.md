@@ -3,9 +3,8 @@
 Welcome to Chapter 7! This chapter is a bit different from the previous ones. Your mission: implement changes in the architecture diagram on the portal. Let's get hacking!
 
 1. **Analyze the Architecture**: Take a close look at the architecture diagram provided below
-   
+
    ![Architecture Diagram](00_app-service-reference-architecture-complete.png)
-   
    You can also download the full architecture diagram here: [Download Full Architecture Diagram](./app-service-reference-architecture-complete.vsdx)
 
 2. **Implement Changes**: Identify the areas that need improvement or modification and implement those changes directly in the Azure Portal.

@@ -36,7 +36,7 @@ Select **Get** and **List** Operations for the access
 ![image](../image/11b2_RBAC.png)
 
 **You have two options:** You can assign the selected Permissions 
-* to a *User* under **Principal** 
+* to a *User* under **Principal**
 or 
 * to an **Application**.
 
@@ -143,3 +143,4 @@ Create the *private endpoint resource*.
 ![image](../image/12c_keyVault.png)
 
  **[< previous Chapter 5 - Network Architecture - Secure the resources](../chapter-5/README.md) | [next chapter 7 - Reverse Engineering >>](../chapter-7/README.md) |**
+ 

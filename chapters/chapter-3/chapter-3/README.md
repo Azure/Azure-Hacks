@@ -2,7 +2,7 @@
 
 ## Task 1 - Open the Application Insights dashboard
 
-- Use [`azd monitor`](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app) to monitor the application 
+- Use [azd monitor](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app) to monitor the application
 
 Run the following Terminal Command in the directory
 
@@ -11,9 +11,10 @@ Run the following Terminal Command in the directory
 ## Task 2 - Navigate through the metrics
 
 Navigate to the Application Insights dashboards:
-- overview
-- live metrics
-- logs
+
+- Overview
+- Live metrics
+- Logs
 
 ![image](../image/04_APP_App_Insights_dashboards.png)
 

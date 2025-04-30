@@ -7,7 +7,7 @@ This challenge series will guide you through the process of architecting a simpl
 
 - [**Architecting on Azure - Hack Introduction**](#hack-introduction)
 - **Architect an N-tier App - Hack Challenges**
-  - [General Prerequisites & Setup](../1-SETUP/README.md)
+  - [General Prerequisites & Setup](../../README.md#general-prerequisites)
   - [Challenge 0 - Start Architecting](chapter-0/README.md)
   - [Challenge 1 - Select a Blueprint to Start](chapter-1/README.md)
   - [Challenge 2 - Deploy the Resources and Web App](chapter-2/README.md)
