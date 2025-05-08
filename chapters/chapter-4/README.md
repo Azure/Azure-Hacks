@@ -72,12 +72,29 @@ Reference: [Automatic scaling in Azure App Service](https://learn.microsoft.com/
 > [!CAUTION]
 > Please follow the instructions to DEMO: <https://microsoftlearning.github.io/AZ-104-MicrosoftAzureAdministrator/Instructions/Demos/07%20-%20Administer%20Azure%20Storage.html>
 
-### Lab - Manage Azure Storage
+### Lab 01 - Manage Azure Storage
 
 In this lab you learn to create storage accounts for Azure blobs and Azure files. You learn to configure and secure blob containers. You also learn to use Storage Browser to configure and secure Azure file shares.
 
 > [!IMPORTANT]
-> Please follow the instructions in this lab - **Exercise**: <https://microsoftlearning.github.io/AZ-104-MicrosoftAzureAdministrator/Instructions/Labs/LAB_07-Manage_Azure_Storage.html>
+> Please follow the instructions in this lab - **Exercise 50min**: <https://microsoftlearning.github.io/AZ-104-MicrosoftAzureAdministrator/Instructions/Labs/LAB_07-Manage_Azure_Storage.html>
+
+## Lab 02 - Data Science Tooling - Working with Storage & Databases
+
+### Actions
+
+* Deploy a Windows Server 2022 VM in Germany West Central Resource Group. Please use the "Data Science Virtual Machine - Windows 2022" image from the market place.
+  > **Note:** The 'Data Science Virtual Machine (DSVM)' is a 'Windows Server 2022 with Containers' VM that has several popular tools for data exploration, analysis, modeling & development pre-installed.
+  > You will use **Microsoft SQL Server Management Studio** to connect to the database and **Storage Explorer** to the storage Account.
+* Create a blob container and upload a sample file to it.
+* From the Data Science Windows Server VM, connect to the storage account.
+* OPTIONAL - Deploy an Azure SQL database server with a database containing the sample data of AdventureWorksLT.
+* OPTIONAL - From the Data Science Windows Server VM, connect to the database.
+
+### Success Criteria ✅
+* You have deployed a VM in Azure (one with Windows Server 2022 - Data Science Virtual Machine).
+* You have deployed an Azure SQL database with sample data (AdventureWorksLT) and can access the database from the Windows Server (Data Science Edition).
+* You successfully connected to the database and the storage account from the Windows Server.
 
 ## Continue
 
