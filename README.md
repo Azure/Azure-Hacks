@@ -1,58 +1,105 @@
-# Microsoft Cloud Academy - Bosch Training Days
+# BMW Platform Academy – Microsoft Cloud Academy
 
-## ℹ️ Introduction
+Welcome to the BMW Platform Academy – Microsoft Cloud Academy repository! This comprehensive 4-day program covers Azure fundamentals through hands-on hackathons focusing on Security, Architecture, Development, and Reliability.
 
-Welcome to the Bosch Training Days! Over the next three days, we’ll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
+**Date**: 21–24 July 2025  
+**Led by**: Microsoft BMW Team (Demir Senturk, Ivan Mc Kinley, Mpho Muthige, Antonio Tshiembi)
 
-### Day 1️⃣: Azure Fundamentals
+## Overview
 
-- Explore Azure Portal
-- Azure Virtual Networks and Virtual Machines
-- Create role assignments for resources
-- Networking Part 1: VNets, VMs and NSGs
-- Install a small web server
+The BMW Platform Academy – Microsoft Cloud Academy is a comprehensive 4-day hands-on learning experience designed to build expertise across core Azure disciplines: Security, Architecture, Development, and Reliability.
 
-### Day 2️⃣: Networking & IaC
+## Prerequisites & Setup
 
-- Networking Part 2: Public IPs, Bastion
-- Overview of Ifrastructure as Code (IaC)
-- Dive into Terraform Basics: resource providers, variables, and modules.
-- Hands-on labs for simple deployments via Terraform.
+Before starting the hackathons, please complete the [Setup Guide](1-SETUP/README.md) to ensure you have all required tools installed:
+- Azure Developer CLI (azd)
+- Terraform
+- Azure CLI
+- Visual Studio Code
+- PowerShell
 
-### Day 3️⃣: Azure Identity4
+## Agenda
 
-- Create more complex Azure resources
-- Dive into Entra ID and Role-Based Access Control (RBAC)
-- Focus on Privileged Identity Management (PIM)
-- Deploy and architect a new N-tier Application
+### Day 1 – 21 July (Monday): Kickoff + Azure Hack: Security (6h)
+- **Introduction (2h)**: What is Cloud? Public/Private/Internet concepts
+- **Azure Landing Zones**: Explore Azure Landing Zones & BMW Hub & Spoke architecture
+- **[Security Hack (4h)](5-SECURITY/README.md)**: Apply Zero Trust and cloud security principles in Azure infrastructure
 
-## 🎬 Getting started
+### Day 2 – 22 July (Tuesday): Azure Hack: Architecting (8h)
+- **[Architecting on Azure](2-ARCHITECTURE/README.md)**: Design N-tier applications
+- **Focus Areas**: Compute, Storage, Connectivity
+- **Hands-on**: Architecture design challenges and implementation
 
-### General prerequisites
+### Day 3 – 23 July (Wednesday): Azure Hack: Developing (8h)
+- **[Developing on Azure](4-DEVELOPING/README.md)**: Build resilient microservices
+- **Technologies**: EventHub, AppConfig, Cosmos DB
+- **CI/CD**: Deploy applications via GitHub Actions
 
-- Computer with internet access (admin rights required)
-- Microsoft authenticator app pre-installed
-- Access to [Azure Portal](https://portal.azure.com/)
+### Day 4 – 24 July (Thursday): Azure Hack: Reliability (8h) + Wrap-Up (30min)
+- **[Reliability on Azure](3-RELIABILITY/README.md)**: Deploy redundant web applications
+- **Monitoring**: VM backup, monitoring, incident alerts
+- **Chaos Engineering**: Simulate failures with Azure Chaos Studio
+- **Closing**: Final reflections and wrap-up session
 
-Installed fixed versions of the following tools:
+## Program Learning Path
 
-- [Powershell 7.2.24](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5)
-- [Winget v1.9.25200](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
-- [az CLI Version 2.69.0](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
-- [VS Code with HashiCorp Terraform extension v2.34.3 installed](https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform)
-- [Git version 2.48.1](https://git-scm.com/downloads/win)
-- [Terraform 1.5.7](https://developer.hashicorp.com/terraform/install)
-- [Azd 1.12.0](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-windows)
-- [Kubctl Client Version: v1.31.4](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
-- Open SSL (should be installed per default)
+This 4-day program is designed as a comprehensive learning journey:
 
-### 🧑‍🏫/🧑‍🔬 Chapters
+**🔒 Day 1 Foundation**: Security principles and Zero Trust implementation provide the secure foundation for everything you'll build.
 
-- [Chapter 1 - Azure Fundamentals](chapters/chapter-1/README.md)
-- [Chapter 2 - Lab: Azure Portal](chapters/chapter-2/README.md)
-- [Chapter 3 - Azure AD: Entra ID](chapters/chapter-3/README.md)
+**🏗️ Day 2 Structure**: Architecture principles and N-tier design give you the blueprint for scalable solutions.
 
-## 🧑‍🤝‍🧑 Contributors
+**💻 Day 3 Implementation**: Development practices and microservices bring your architecture to life with modern cloud-native patterns.
 
-- Demir Senturk - [GitHub](https://github.com/demirsenturk_microsoft)
-- Berdiguly Yaylymov - [GitHub](https://github.com/yaylymov)
+**🔄 Day 4 Operations**: Reliability engineering and chaos testing ensure your solutions are production-ready.
+
+Each day builds upon the previous, creating a holistic understanding of Azure cloud engineering.
+
+## Success Criteria
+
+By completing this 4-day academy, participants will:
+- ✅ **Understand** Zero Trust security principles and Azure identity management
+- ✅ **Design** scalable N-tier applications using Azure best practices  
+- ✅ **Develop** resilient microservices with proper CI/CD pipelines
+- ✅ **Operate** reliable systems with monitoring, backup, and chaos engineering
+- ✅ **Apply** BMW-specific considerations for enterprise Azure deployments
+
+## Getting Started
+
+1. **Before Day 1**: Complete [Prerequisites & Setup](1-SETUP/README.md)
+2. **Day 1**: Begin with [Security Hackathon](5-SECURITY/README.md)
+3. **Follow the daily progression** through Architecture → Development → Reliability
+
+## BMW Platform Academy Team
+
+**Led by BMW Cell Team:**
+- **Demir Senturk** - Program Lead & Architecture Specialist
+- **Ivan Mc Kinley** - Development & DevOps Specialist  
+- **Mpho Muthige** - Cloud Operations Specialist
+- **Antonio Tshiembi** - Security & Compliance Specialist
+
+**Microsoft Support:**
+Cloud Solution Architects will provide on-site and remote support throughout the program.
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow 
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+## Contributors
+
+**Team:**
+- **Demir Senturk** - Program Lead & Architecture Specialist
+- **Ivan Mc Kinley** - Development & DevOps Specialist  
+- **Mpho Muthige** - Cloud Operations Specialist
+- **Antonio Tshiembi** - Security & Compliance Specialist
+- **Andressa Jendreieck** - Reliability Engineering
+- **Oleg Sipaylo** - Security & Compliance
+- **Uwe Hoffmann** - Azure Technical Specialist - Program Coordination
+
+---
+
+*BMW Platform Academy – Microsoft Cloud Academy (21–24 July 2025)*
