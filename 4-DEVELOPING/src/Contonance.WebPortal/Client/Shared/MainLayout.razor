@@ -1,0 +1,70 @@
+﻿@inherits LayoutComponentBase
+@inject OnlineStatusInterop OnlineStatusInterop
+@inject IConfiguration Configuration
+@inject HttpClient HttpClient
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            @if(IsOnline)
+            {
+                <strong class="text-success">Online</strong>
+            }
+            else
+            {
+                <strong class="text-danger">Offline</strong>
+            }
+            &nbsp;|&nbsp;
+            @if (!string.IsNullOrEmpty(EnvironmentVariable))
+            {
+                <strong>Environment: @EnvironmentVariable</strong>
+            }        </div>
+
+        <article class="content px-4">
+             @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    [Parameter]
+    public bool IsOnline { get; set; }
+    public EventCallback<bool>? IsOnlineChanged { get; set; }
+      private string EnvironmentVariable { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        OnlineStatusInterop.OnlineStatusChanged += (s, v) =>
+        {
+            IsOnline = v;
+            IsOnlineChanged?.InvokeAsync(v);
+            StateHasChanged();
+        };
+        // Retrieve the environment variable from the backend
+        EnvironmentVariable = await GetEnvironmentVariableFromBackend();
+                 Console.WriteLine($"Environment Variable APP_VERSION: {EnvironmentVariable}");
+
+        await OnlineStatusInterop.Initialize();
+       
+
+    }
+       private async Task<string> GetEnvironmentVariableFromBackend()
+    {
+        try
+        {
+            // Replace with your backend API endpoint
+            var response = await HttpClient.GetAsync("/RepairReports/version");
+            response.EnsureSuccessStatusCode();
+
+            var environmentVariable = await response.Content.ReadAsStringAsync();
+            return environmentVariable;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching environment variable: {ex.Message}");
+            return string.Empty;
+        }
+    }
+}
