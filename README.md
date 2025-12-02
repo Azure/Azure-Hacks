@@ -1,85 +1,62 @@
-# BMW Platform Academy – Microsoft Cloud Academy
+# Continental Academy – Microsoft Azure Architecture Hackathon
 
-Welcome to the BMW Platform Academy – Microsoft Cloud Academy repository! This comprehensive 4-day program covers Azure fundamentals through hands-on hackathons focusing on Security, Architecture, Development, and Reliability.
+Welcome to the Continental Academy – Microsoft Azure Architecture Hackathon repository! This focused 1-day program delivers hands-on experience in architecting scalable, secure N-tier applications on Azure.
 
-**Date**: 21–24 July 2025  
-**Led by**: Microsoft BMW Team (Demir Senturk, Ivan Mc Kinley, Mpho Muthige, Antonio Tshiembi)
+**Date**: December 3, 2025  
+**Led by**: Microsoft Team
 
 ## Overview
 
-The BMW Platform Academy – Microsoft Cloud Academy is a comprehensive 4-day hands-on learning experience designed to build expertise across core Azure disciplines: Security, Architecture, Development, and Reliability.
+The Continental Academy – Microsoft Azure Architecture Hackathon is an intensive 1-day hands-on learning experience focused on architecting robust, scalable N-tier applications on Microsoft Azure. Participants will gain practical expertise in Azure's three foundational pillars: Compute, Storage, and Connectivity, while applying architectural best practices and security principles.
 
 ## Prerequisites & Setup
 
-Before starting the hackathons, please complete the [Setup Guide](1-SETUP/README.md) to ensure you have all required tools installed:
+Before starting the hackathon, please complete the [Setup Guide](1-SETUP/README.md) to ensure you have all required tools installed:
 - Azure Developer CLI (azd)
-- Terraform
 - Azure CLI
+- Terraform (optional)
 - Visual Studio Code
 - PowerShell
 
 ## Agenda
 
-### Day 1 – 21 July (Monday): Kickoff + Azure Hack: Security (6h)
-- **Introduction (2h)**: What is Cloud? Public/Private/Internet concepts
-- **Azure Landing Zones**: Explore Azure Landing Zones & BMW Hub & Spoke architecture
-- **[Security Hack (4h)](5-SECURITY/README.md)**: Apply Zero Trust and cloud security principles in Azure infrastructure
+### December 3, 2025 (Tuesday): Azure Architecture Hackathon (Full Day)
+- **Morning Session**: Introduction to Azure Architecture & N-tier Design
+  - Cloud architecture fundamentals
+  - Azure services overview (Compute, Storage, Networking)
+  - Architecture best practices
+- **Hands-on Hackathon**: [Architecting on Azure](2-ARCHITECTURE/README.md)
+  - Design and deploy scalable N-tier applications
+  - Implement Azure Compute, Storage, and Connectivity services
+  - Apply security by design principles
+  - Configure monitoring and observability
 
-### Day 2 – 22 July (Tuesday): Azure Hack: Architecting (8h)
-- **[Architecting on Azure](2-ARCHITECTURE/README.md)**: Design N-tier applications
-- **Focus Areas**: Compute, Storage, Connectivity
-- **Hands-on**: Architecture design challenges and implementation
+## Learning Path
 
-### Day 3 – 23 July (Wednesday): Azure Hack: Developing (8h)
-- **[Developing on Azure](4-DEVELOPING/README.md)**: Build resilient microservices
-- **Technologies**: EventHub, AppConfig, Cosmos DB
-- **CI/CD**: Deploy applications via GitHub Actions
+This 1-day hackathon is designed as an intensive, hands-on architecture experience:
 
-### Day 4 – 24 July (Thursday): Azure Hack: Reliability (8h) + Wrap-Up (30min)
-- **[Reliability on Azure](3-RELIABILITY/README.md)**: Deploy redundant web applications
-- **Monitoring**: VM backup, monitoring, incident alerts
-- **Chaos Engineering**: Simulate failures with Azure Chaos Studio
-- **Closing**: Final reflections and wrap-up session
-
-## Program Learning Path
-
-This 4-day program is designed as a comprehensive learning journey:
-
-**🔒 Day 1 Foundation**: Security principles and Zero Trust implementation provide the secure foundation for everything you'll build.
-
-**🏗️ Day 2 Structure**: Architecture principles and N-tier design give you the blueprint for scalable solutions.
-
-**💻 Day 3 Implementation**: Development practices and microservices bring your architecture to life with modern cloud-native patterns.
-
-**🔄 Day 4 Operations**: Reliability engineering and chaos testing ensure your solutions are production-ready.
-
-Each day builds upon the previous, creating a holistic understanding of Azure cloud engineering.
+**🏗️ Architecture Focus**: Learn to design and implement scalable N-tier applications using Azure best practices, covering compute, storage, networking, monitoring, and security.
 
 ## Success Criteria
 
-By completing this 4-day academy, participants will:
-- ✅ **Understand** Zero Trust security principles and Azure identity management
-- ✅ **Design** scalable N-tier applications using Azure best practices  
-- ✅ **Develop** resilient microservices with proper CI/CD pipelines
-- ✅ **Operate** reliable systems with monitoring, backup, and chaos engineering
-- ✅ **Apply** BMW-specific considerations for enterprise Azure deployments
+By completing this hackathon, participants will:
+- ✅ **Design** scalable N-tier applications using Azure best practices
+- ✅ **Deploy** Azure App Services, Cosmos DB, and networking resources
+- ✅ **Implement** Virtual Networks, Private Links, and Network Security Groups
+- ✅ **Configure** Azure Monitor and Application Insights for observability
+- ✅ **Apply** security by design principles throughout the architecture
+- ✅ **Understand** Azure Well-Architected Framework principles
 
 ## Getting Started
 
-1. **Before Day 1**: Complete [Prerequisites & Setup](1-SETUP/README.md)
-2. **Day 1**: Begin with [Security Hackathon](5-SECURITY/README.md)
-3. **Follow the daily progression** through Architecture → Development → Reliability
+1. **Before the Hackathon**: Complete [Prerequisites & Setup](1-SETUP/README.md)
+2. **December 3, 2025**: Begin with [Architecting Hackathon](./2-ARCHITECTURE/README.md)
+3. **Progress through** all architecture challenges from Chapter 0 to Chapter 7
 
-## BMW Platform Academy Team
-
-**Led by BMW Cell Team:**
-- **Demir Senturk** - Program Lead & Architecture Specialist
-- **Ivan Mc Kinley** - Development & DevOps Specialist  
-- **Mpho Muthige** - Cloud Operations Specialist
-- **Antonio Tshiembi** - Security & Compliance Specialist
+## Microsoft Team
 
 **Microsoft Support:**
-Cloud Solution Architects will provide on-site and remote support throughout the program.
+Cloud Solution Architects will provide support throughout the hackathon.
 
 ## Trademarks
 
@@ -92,14 +69,15 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 ## Contributors
 
 **Team:**
-- **Demir Senturk** - Program Lead & Architecture Specialist
+- **Demir Senturk** - Program Lead & Architecture Specialist (Microsoft CSA)
+- **Sebastian Pfaller** - Chief Architect
 - **Ivan Mc Kinley** - Development & DevOps Specialist  
 - **Mpho Muthige** - Cloud Operations Specialist
-- **Antonio Tshiembi** - Security & Compliance Specialist
+- **Antonio Tshiembi** - Reliability Engineering
 - **Andressa Jendreieck** - Reliability Engineering
 - **Oleg Sipaylo** - Security & Compliance
 - **Uwe Hoffmann** - Azure Technical Specialist - Program Coordination
 
 ---
 
-*BMW Platform Academy – Microsoft Cloud Academy (21–24 July 2025)*
+*Continental Academy – Microsoft Azure Architecture Hackathon (December 3, 2025)*

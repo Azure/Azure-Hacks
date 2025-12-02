@@ -1,20 +1,25 @@
-# Day 2: Azure Architecture Hackathon
+# Azure Architecture Hackathon
 
-## Welcome to Day 2!
+## Welcome to the Continental Architecture Hackathon!
 
-Today's full-day hackathon focuses on architecting robust, scalable N-tier applications on Azure. You'll design and implement solutions covering the three fundamental pillars: Compute, Storage, and Connectivity, while applying architectural best practices learned from Day 1's security foundation.
+Today's full-day hackathon focuses on architecting robust, scalable N-tier applications on Azure. You'll design and implement solutions covering the three fundamental pillars: Compute, Storage, and Connectivity, while applying architectural best practices and security by design principles.
 
-## Day 2 Schedule (8 hours)
+## Schedule (Full Day - December 3, 2025)
+
+**Morning Session**
+- Introduction to Azure Architecture fundamentals
+- Overview of Azure services (Compute, Storage, Networking)
+- N-tier application design principles
 
 **Full-Day Architecture Hackathon**
 - Design N-tier applications using Azure best practices
 - **Focus Areas**: Compute, Storage, Connectivity
 - Hands-on architecture challenges and implementation
-- Apply security principles from Day 1 throughout your architecture
+- Apply security by design principles throughout your architecture
 
 ## Learning Objectives
 
-By the end of Day 2, you will:
+By the end of this hackathon, you will:
 - ✅ Design and implement N-tier applications on Azure
 - ✅ Master Azure Compute services (App Services, Container Apps)
 - ✅ Implement Azure Storage solutions (Cosmos DB, Storage Accounts)
@@ -25,7 +30,7 @@ By the end of Day 2, you will:
 ## Architecture Challenge Overview
 
 Welcome to the "**Architecting on Azure**" hack! 
-This challenge series will guide you through architecting a secure, scalable N-tier application on Microsoft Azure, building upon the security foundations established on Day 1.
+This challenge series will guide you through architecting a secure, scalable N-tier application on Microsoft Azure, applying best practices for compute, storage, networking, monitoring, and security.
 
 ## Table of Contents
 - [**Architecting on Azure - Hack Introduction**](#hack-introduction)
@@ -80,4 +85,4 @@ This first challenge will introduce you to the architecture foundations and guid
 
 Before proceeding, please ensure you have completed the necessary setup as described in the [Setup Guide](../1-SETUP/README.md).
 
-**| [< SETUP](../1-SETUP/README.md) | [RELIABILITY >](../3-RELIABILITY/README.md) |**
+**| [< Back to Main](../README.md) | [Setup Guide](../1-SETUP/README.md) |**

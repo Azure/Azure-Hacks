@@ -1,17 +1,17 @@
 # Prerequisites & Setup
 
-**Complete this setup BEFORE the Azure Academy (21-24 July 2025)**
+**Complete this setup BEFORE the Azure Architecture Hackathon (December 3, 2025)**
 
-This guide will help you install and configure all the necessary tools required for the 4-day Azure hackathon experience. Please complete all setup steps before Day 1 to ensure you're ready to participate fully in the hands-on activities.
+This guide will help you install and configure all the necessary tools required for the 1-day Azure Architecture hackathon. Please complete all setup steps before the hackathon to ensure you're ready to participate fully in the hands-on activities.
 
 ## Required Tools Overview
 
-The following tools are essential for participating in the Azure hackathons:
+The following tools are essential for participating in the Azure Architecture hackathon:
 - **Azure Developer CLI (azd)** - For rapid Azure application deployment
 - **Azure CLI (az)** - For Azure resource management
-- **Terraform** - For Infrastructure as Code
 - **Visual Studio Code** - Primary development environment
 - **PowerShell** - For Azure automation tasks
+- **Terraform** - Optional, for Infrastructure as Code
 
 Open Visual Studio Code (VS Code) or a text editor. 
 - Start with an empty directory.
@@ -51,10 +51,6 @@ Optional - [Azure Developer CLI Visual Studio Code extension](https://marketplac
 - **az-CLI**: The Azure Command-Line Interface (CLI) is a set of commands used to manage Azure resources from the command line or scripts. It provides a way to automate tasks, manage resources, and interact with Azure services using a text-based interface.
 - **VS Code**: Visual Studio Code (VS Code) is a lightweight, open-source code editor that provides a rich set of features for code editing, debugging, and version control. It supports a wide range of programming languages, extensions, and integrations to enhance productivity and collaboration.
 - **PowerShell**: PowerShell is a task automation and configuration management framework that provides a command-line shell and scripting language for managing Windows and Azure resources. It allows for the automation of administrative tasks, configuration settings, and resource management.
-
-> [!CAUTION]
-> **Important**: The instructor should clearly mention that CloudShell often can not be used with BMW Tenants.
-> 
 
 - **Terraform**: Terraform is an open-source infrastructure as code (IaC) tool that allows for the provisioning and management of cloud resources using declarative configuration files. It enables the automation of infrastructure deployment, configuration, and updates across multiple cloud providers.
 
@@ -129,7 +125,7 @@ An a terraform cheat sheet see [here](https://github.com/devops-cheat-sheets/ter
 ### Azure CLI Setup & Authentication
 
 > [!CAUTION]
-> **Important**: Complete Azure CLI setup and authentication before Day 1.
+> **Important**: Complete Azure CLI setup and authentication before the hackathon.
 
 #### Installation
 Install Azure CLI: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
@@ -150,19 +146,19 @@ az account list --output table
 ```
 
 #### Enterprise Tenant Considerations
-> [!CAUTION]
-> **Important**: CloudShell often cannot be used with enterprise tenants. Use local Azure CLI installation instead.
+> [!NOTE]
+> For Continental tenant access, use local Azure CLI installation. CloudShell may have limitations with enterprise tenants.
 
-## Success Criteria - Ready for Azure Academy
+## Success Criteria - Ready for the Architecture Hackathon
 
 ✅ You have successfully installed **Azure Developer CLI**  
-✅ You have successfully installed **Terraform**  
 ✅ You have successfully installed **Azure CLI**  
 ✅ Visual Studio Code is installed and ready  
 ✅ PowerShell is configured and working  
 ✅ You can authenticate to Azure successfully  
+✅ (Optional) Terraform is installed
 
-**Once you've completed all setup steps, you're ready for the Azure Academy!**
+**Once you've completed all setup steps, you're ready for the Architecture Hackathon!**
 
 ### Additional Learning Resources
 
@@ -173,13 +169,10 @@ az account list --output table
 #### Azure Developer CLI
 - Training: https://learn.microsoft.com/en-us/training/paths/azure-developer-cli/
 
-## Azure Academy Schedule
+## Hackathon Schedule
 
-**Day 1 (21 July)**: [Security Hackathon](../5-SECURITY/README.md)  
-**Day 2 (22 July)**: [Architecture Hackathon](../2-ARCHITECTURE/README.md)  
-**Day 3 (23 July)**: [Development Hackathon](../4-DEVELOPING/README.md)  
-**Day 4 (24 July)**: [Reliability Hackathon](../3-RELIABILITY/README.md)  
+**December 3, 2025**: [Architecture Hackathon](../2-ARCHITECTURE/README.md) - Full Day
 
 ## Continue
 
-**[< back](../../README.md) | [Start Day 1: Security >](../5-SECURITY/README.md)**
+**[< Back to Main](../README.md) | [Start Architecture Hackathon >](../2-ARCHITECTURE/README.md)**
