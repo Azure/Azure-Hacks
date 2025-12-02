@@ -20,7 +20,7 @@ Before starting the hackathon, please complete the [Setup Guide](1-SETUP/README.
 
 ## Agenda
 
-### December 3, 2025 (Tuesday): Azure Architecture Hackathon (Full Day)
+### December 3, 2025: Azure Architecture Hackathon (Full Day)
 - **Morning Session**: Introduction to Azure Architecture & N-tier Design
   - Cloud architecture fundamentals
   - Azure services overview (Compute, Storage, Networking)
