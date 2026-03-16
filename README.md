@@ -1,83 +1,95 @@
-# Continental Academy – Microsoft Azure Architecture Hackathon
+# ☁️ Azure Training Sessions
 
-Welcome to the Continental Academy – Microsoft Azure Architecture Hackathon repository! This focused 1-day program delivers hands-on experience in architecting scalable, secure N-tier applications on Azure.
+## ℹ️ Introduction
 
-**Date**: December 3, 2025  
-**Led by**: Microsoft Team
+Welcome to the Azure Training Program! Over the next four days, we’ll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
 
-## Overview
+### Day 1️⃣: Azure Fundamentals and Landing Zones
 
-The Continental Academy – Microsoft Azure Architecture Hackathon is an intensive 1-day hands-on learning experience focused on architecting robust, scalable N-tier applications on Microsoft Azure. Participants will gain practical expertise in Azure's three foundational pillars: Compute, Storage, and Connectivity, while applying architectural best practices and security principles.
+- Explore Azure Landing Zones and Hub & Spoke architecture.
+- Understand general enterprise architecture in Azure.
+- Practical labs: Create vNets, VMs, and storage resources using the Azure GUI (with a clear emphasis that the GUI is read-only).
 
-## Prerequisites & Setup
+### Day 2️⃣: Identity and CI/CD Pipelines
 
-Before starting the hackathon, please complete the [Setup Guide](1-SETUP/README.md) to ensure you have all required tools installed:
-- Azure Developer CLI (azd)
-- Azure CLI
-- Terraform (optional)
-- Visual Studio Code
-- PowerShell
+- Dive into Azure Active Directory (Azure AD) and Role-Based Access Control (RBAC).
+- Focus on Privileged Identity Management (PIM) following Microsoft standards.
+- Components of a CI/CD pipeline: GitHub Actions and Terraform.
+- Learn Terraform language basics: resource providers, variables, and modules.
+- Hands-on labs for simple deployments via Terraform.
 
-## Agenda
+### Day 3️⃣: Hands-On Deployments
 
-### December 3, 2025: Azure Architecture Hackathon (Full Day)
-- **Morning Session**: Introduction to Azure Architecture & N-tier Design
-  - Cloud architecture fundamentals
-  - Azure services overview (Compute, Storage, Networking)
-  - Architecture best practices
-- **Hands-on Hackathon**: [Architecting on Azure](2-ARCHITECTURE/README.md)
-  - Design and deploy scalable N-tier applications
-  - Implement Azure Compute, Storage, and Connectivity services
-  - Apply security by design principles
-  - Configure monitoring and observability
+- Practical exercises: Create straightforward deployments via Terraform.
+- Build components like VMs, vNets, App Gateway, AKS, and a database.
+- Ideally, construct a simple application to reinforce concepts.
 
-## Learning Path
+### Day 4️⃣: Modular Deployment and Architecture Design (Optional)
 
-This 1-day hackathon is designed as an intensive, hands-on architecture experience:
+- Explore best practices for modularizing deployments via CI/CD.
+- Develop architecture for a specific service.
 
-**🏗️ Architecture Focus**: Learn to design and implement scalable N-tier applications using Azure best practices, covering compute, storage, networking, monitoring, and security.
+Get ready for an engaging and informative learning experience! Let’s explore Azure together. 🚀
 
-## Success Criteria
+## 🎬 Getting started
 
-By completing this hackathon, participants will:
-- ✅ **Design** scalable N-tier applications using Azure best practices
-- ✅ **Deploy** Azure App Services, Cosmos DB, and networking resources
-- ✅ **Implement** Virtual Networks, Private Links, and Network Security Groups
-- ✅ **Configure** Azure Monitor and Application Insights for observability
-- ✅ **Apply** security by design principles throughout the architecture
-- ✅ **Understand** Azure Well-Architected Framework principles
+### General prerequisites
 
-## Getting Started
+- Computer with internet access (admin rights required)
+- Microsoft authenticator app pre-installed
+- Access to [Azure Portal](https://portal.azure.com/)
 
-1. **Before the Hackathon**: Complete [Prerequisites & Setup](1-SETUP/README.md)
-2. **December 3, 2025**: Begin with [Architecting Hackathon](./2-ARCHITECTURE/README.md)
-3. **Progress through** all architecture challenges from Chapter 0 to Chapter 7
+Installed fixed versions of the following tools:
+- Powershell 7.2.24
+- Winget v1.9.25200
+- az CLI Version 2.69.0
+- VS Code with HashiCorp Terraform extension v2.34.3 installed
+- Git version 2.48.1
+- Terraform 1.5.7
+- Azd 1.12.0
+- Dubectl v1.32.2
+- Kubctl Client Version: v1.31.4
+- Open SSL
 
-## Microsoft Team
 
-**Microsoft Support:**
-Cloud Solution Architects will provide support throughout the hackathon.
+### 🧑‍🏫/🧑‍🔬 Program
 
-## Trademarks
+#### Day 1 — Azure Fundamentals
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+- [Chapter 0 - Recommended Tools](day1/chapter-0/README.md)
+- [Chapter 1 - Theory & Lab: VNet, VMs and Azure Portal](day1/chapter-1/README.md)
 
-## Contributors
+Day 1 challenge sequence:
 
-**Team:**
-- **Demir Senturk** - Program Lead & Architecture Specialist (Microsoft CSA)
-- **Sebastian Pfaller** - Chief Architect
-- **Ivan Mc Kinley** - Development & DevOps Specialist  
-- **Mpho Muthige** - Cloud Operations Specialist
-- **Antonio Tshiembi** - Reliability Engineering
-- **Andressa Jendreieck** - Reliability Engineering
-- **Oleg Sipaylo** - Security & Compliance
-- **Uwe Hoffmann** - Azure Technical Specialist - Program Coordination
+- [Challenge 0 - Deploy the Multi-Region Lab](day1/chapter-1/challenge/README.md)
+- [Challenge 1 - Connect with Azure Bastion](day1/chapter-1/challenge1/README.md)
+- [Challenge 2 - Build Resiliency with Load Balancer](day1/chapter-1/challenge2/README.md)
 
----
+#### Day 2 — Security & Infrastructure as Code
 
-*Continental Academy – Microsoft Azure Architecture Hackathon (December 3, 2025)*
+- [Chapter 2 - Azure AD: Entra ID](day2/chapter-2/README.md)
+- [Chapter 3 - Terraform Basics](day2/chapter-3/README.md)
+
+#### Day 3 — Hands-On Deployments
+
+- [Chapter 4 - Lab: Simple Terraform Deployment](day3/chapter-4/README.md)
+- [Chapter 5 - Lab: Developing and Deploying a Complex Landscape](day3/chapter-5/README.md)
+
+## 🗑️ Clean up Azure subscription (Instructors only!)
+
+> [!CAUTION]
+> **Disclaimer for the instructors**
+
+Please remember to clean up your Azure subscription after each day. This will help you avoid unnecessary costs and keep your subscription organized.
+
+In order to clean up your Azure subscription, you can use the provided script:
+
+```bash
+./clean-up-azure-sub.sh <subscription-id>
+```
+
+## 🧑‍🤝‍🧑 Contributors
+
+- Hengameh Bigdeloo - [GitHub](https://github.com/hbigdeloo)
+- Demir Senturk - [GitHub](https://github.com/demirsenturk_microsoft)
+- Sebastian Pfaller - [GitHub]()
