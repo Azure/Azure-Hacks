@@ -89,7 +89,9 @@ In order to clean up your Azure subscription, you can use the provided script:
 ```
 
 ## 🧑‍🤝‍🧑 Contributors
-
 - Hengameh Bigdeloo - [GitHub](https://github.com/hbigdeloo)
 - Demir Senturk - [GitHub](https://github.com/demirsenturk_microsoft)
+- Joerg Joess - [GitHub]()
 - Sebastian Pfaller - [GitHub]()
+- Begum Yivli - [GitHub]()
+- Berdiguly Yalymov - [GitHub]()

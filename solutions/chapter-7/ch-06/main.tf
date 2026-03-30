@@ -136,7 +136,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "YWRtaW51c2VyC"
-    public_key = file(var.ssh_key)
+    public_key = var.ssh_key
   }
 
   os_disk {
@@ -188,7 +188,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     admin_username = "YWRtaW51c2VyC"
 
     ssh_key {
-      key_data = file(var.ssh_key)
+      key_data = var.ssh_key
     }
   }
 
@@ -207,4 +207,38 @@ resource "azurerm_role_assignment" "acr_pull" {
   role_definition_name             = "AcrPull"
   scope                            = azurerm_container_registry.acr.id
   skip_service_principal_aad_check = true
+}
+
+# Create a private DNS zone for PostgreSQL
+resource "azurerm_private_dns_zone" "private_dns" {
+  name                = "${local.name_prefix}.postgres.database.azure.com"
+  resource_group_name = azurerm_resource_group.lab.name
+}
+
+# Create a virtual network link to the private DNS zone
+resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_vnet_link" {
+  name                  = "${local.name_prefix}-vnet-link"
+  private_dns_zone_name = azurerm_private_dns_zone.private_dns.name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  resource_group_name   = azurerm_resource_group.lab.name
+}
+
+# Create an Azure Database for PostgreSQL Flexible Server
+resource "azurerm_postgresql_flexible_server" "postgres" {
+  name                          = "${local.name_prefix}-postgres"
+  resource_group_name           = azurerm_resource_group.lab.name
+  location                      = azurerm_resource_group.lab.location
+  version                       = "16"
+  sku_name                      = "B_Standard_B1ms"
+  zone                          = "1"
+  storage_mb                    = 32768
+  auto_grow_enabled             = true
+  backup_retention_days         = 7
+  administrator_login           = "flexadmin"
+  administrator_password        = random_password.pg_password.result
+  public_network_access_enabled = false
+  delegated_subnet_id           = azurerm_subnet.subnet_3.id
+  private_dns_zone_id           = azurerm_private_dns_zone.private_dns.id
+
+  depends_on = [azurerm_private_dns_zone_virtual_network_link.private_dns_vnet_link]
 }

@@ -228,7 +228,7 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
   name                          = "${local.name_prefix}-postgres"
   resource_group_name           = azurerm_resource_group.lab.name
   location                      = azurerm_resource_group.lab.location
-  version                       = "15"
+  version                       = "16"
   sku_name                      = "B_Standard_B1ms"
   zone                          = "1"
   storage_mb                    = 32768
@@ -245,14 +245,15 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
 
 
 resource "azurerm_cognitive_account" "azure_oai" {
-  name                = "${local.name_prefix}-aoai"
-  location            = azurerm_resource_group.lab.location
-  resource_group_name = azurerm_resource_group.lab.name
-  kind                = "OpenAI"
-  sku_name            = "S0"
+  name                  = "${local.name_prefix}-aoai"
+  location              = azurerm_resource_group.lab.location
+  resource_group_name   = azurerm_resource_group.lab.name
+  kind                  = "OpenAI"
+  sku_name              = "S0"
+  custom_subdomain_name = "${local.name_prefix}-aoai"
 }
 
-resource "azurerm_cognitive_deployment" "gpt_35_turbo_16k_0613" {
+resource "azurerm_cognitive_deployment" "gpt_4o_mini" {
   name                 = var.aoai_model_name
   cognitive_account_id = azurerm_cognitive_account.azure_oai.id
 
@@ -266,4 +267,14 @@ resource "azurerm_cognitive_deployment" "gpt_35_turbo_16k_0613" {
     type     = "Standard"
     capacity = 20
   }
+}
+
+# Get the current user's identity for RBAC
+data "azurerm_client_config" "current" {}
+
+# Grant the current user access to the OpenAI API
+resource "azurerm_role_assignment" "aoai_user" {
+  principal_id         = data.azurerm_client_config.current.object_id
+  role_definition_name = "Cognitive Services OpenAI User"
+  scope                = azurerm_cognitive_account.azure_oai.id
 }

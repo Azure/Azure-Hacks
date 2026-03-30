@@ -14,12 +14,13 @@ variable "vm_size" {
 }
 
 variable "ssh_key" {
-  # Update according to your own username
-  default = "C:/Users/JOJOOSS/.ssh/id_rsa.pub"
-  description = "The public SSH key to use for the jumphost VM and AKS"
+  # Update according to your public key
+  # cat ~/.ssh/id_rsa.pub shows you the string to use
+  default = ""
+  description = "The SSH public key to use for the jumphost VM and AKS"
 }
 
 variable "k8s_version" {
-  default = "1.29.5"
+  default = "1.32.11"
   description = "The version of Kubernetes to deploy"
 }

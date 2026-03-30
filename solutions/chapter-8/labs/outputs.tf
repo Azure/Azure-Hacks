@@ -20,6 +20,5 @@ output "aoai_endpoint"  {
   value = module.ai.aoai_endpoint
 }
 
-output "aoai_key" {
-  value = module.ai.aoai_key
-}
+# Note: API key auth is disabled in this environment (disableLocalAuth=true).
+# Use Entra ID bearer tokens instead.

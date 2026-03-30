@@ -1,12 +1,13 @@
 resource "azurerm_cognitive_account" "azure_oai" {
-  name                = "${var.name_prefix}-aoai"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  kind                = "OpenAI"
-  sku_name            = "S0"
+  name                  = "${var.name_prefix}-aoai"
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  kind                  = "OpenAI"
+  sku_name              = "S0"
+  custom_subdomain_name = "${var.name_prefix}-aoai"
 }
 
-resource "azurerm_cognitive_deployment" "gpt_35_turbo_16k_0613" {
+resource "azurerm_cognitive_deployment" "gpt_4o_mini" {
   name                 = var.aoai_model_name
   cognitive_account_id = azurerm_cognitive_account.azure_oai.id
 
@@ -18,6 +19,6 @@ resource "azurerm_cognitive_deployment" "gpt_35_turbo_16k_0613" {
 
   scale {
     type     = "Standard"
-    capacity = 120
+    capacity = 20
   }
 }

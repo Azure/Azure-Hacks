@@ -14,7 +14,7 @@ variable "resource_group_name" {
 }
 
 variable "k8s_version" {
-  default = "1.29.5"
+  default = "1.32.11"
   description = "The version of Kubernetes to deploy"
 }
 

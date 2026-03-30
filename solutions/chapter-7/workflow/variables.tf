@@ -21,16 +21,16 @@ variable "ssh_key" {
 }
 
 variable "k8s_version" {
-  default = "1.29.5"
+  default = "1.32.11"
   description = "The version of Kubernetes to deploy"
 }
 
 variable "aoai_model_name" {
-  default = "gpt-35-turbo-16k"
+  default = "gpt-4o-mini"
   description = "The name of the OpenAI model to deploy"
 }
 
 variable "aoai_model_version" {
-  default = "0613"
+  default = "2024-07-18"
   description = "The version of the OpenAI model to deploy"
 }
