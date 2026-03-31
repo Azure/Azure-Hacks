@@ -2,7 +2,7 @@
 
 ## ℹ️ Introduction
 
-Welcome to the Azure Training Program! Over the next four days, we’ll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
+Welcome to the Azure Training Program! Over the next six days, we'll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
 
 ### Day 1️⃣: Azure Fundamentals and Landing Zones
 
@@ -24,10 +24,22 @@ Welcome to the Azure Training Program! Over the next four days, we’ll dive int
 - Build components like VMs, vNets, App Gateway, AKS, and a database.
 - Ideally, construct a simple application to reinforce concepts.
 
-### Day 4️⃣: Modular Deployment and Architecture Design (Optional)
+### Day 4️⃣: Containerization: End-to-End
 
 - Explore best practices for modularizing deployments via CI/CD.
-- Develop architecture for a specific service.
+- Build, store, and run containerized applications with Docker, ACR, and AKS.
+
+### Day 5️⃣: Architecting on Azure — Foundations
+
+- Full-day architecture hackathon: Design N-tier applications on Azure.
+- Select architecture blueprints, deploy resources, and monitor with Azure Monitor.
+- Architecture challenges covering Compute, Storage, and Connectivity pillars.
+
+### Day 6️⃣: Architecting on Azure — Networking & Security
+
+- Continue the architecture hackathon with a focus on networking and security.
+- Organize resources in VNets, establish Private Links, and secure resources.
+- Apply RBAC, Azure Key Vault, and the Azure Well-Architected Framework.
 
 Get ready for an engaging and informative learning experience! Let’s explore Azure together. 🚀
 
@@ -74,6 +86,33 @@ Day 1 challenge sequence:
 
 - [Chapter 4 - Lab: Simple Terraform Deployment](day3/chapter-4/README.md)
 - [Chapter 5 - Lab: Developing and Deploying a Complex Landscape](day3/chapter-5/README.md)
+
+#### Day 4 — Containerization: End-to-End
+
+- [Day 4 Overview & Setup](day4/README.md)
+- [Chapter 0 - Container Fundamentals](day4/chapter-0/README.md)
+- [Chapter 1 - Azure Container Registry](day4/chapter-1/README.md)
+- [Chapter 2 - Azure Kubernetes Service](day4/chapter-2/README.md)
+- [Chapter 3 - Lab: ACR with Terraform](day4/chapter-3/README.md)
+- [Chapter 4 - Lab: AKS with Terraform](day4/chapter-4/README.md)
+- [Chapter 5 - Bonus: PostgreSQL with Terraform](day4/chapter-5/README.md)
+- [Chapter 6 - Bonus: Azure OpenAI with Terraform](day4/chapter-6/README.md)
+
+#### Day 5 — Architecting on Azure: Foundations
+
+- [Day 5 Overview](day5/README.md)
+- [Challenge 0 - Start Architecting](2-ARCHITECTURE/chapter-0/README.md)
+- [Challenge 1 - Select a Blueprint](2-ARCHITECTURE/chapter-1/README.md)
+- [Challenge 2 - Deploy Resources](2-ARCHITECTURE/chapter-2/README.md)
+- [Challenge 3 - Monitor Resources](2-ARCHITECTURE/chapter-3/README.md)
+
+#### Day 6 — Architecting on Azure: Networking & Security
+
+- [Day 6 Overview](day6/README.md)
+- [Challenge 4 - Network Architecture: VNet & Private Link](2-ARCHITECTURE/chapter-4/README.md)
+- [Challenge 5 - Network Architecture: Secure Resources](2-ARCHITECTURE/chapter-5/README.md)
+- [Challenge 6 - Security: RBAC Permissions](2-ARCHITECTURE/chapter-6/README.md)
+- [Challenge 7 - Reverse Engineering](2-ARCHITECTURE/chapter-7/README.md)
 
 ## 🗑️ Clean up Azure subscription (Instructors only!)
 
