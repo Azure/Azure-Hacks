@@ -2,6 +2,71 @@
 
 ## ℹ️ Introduction
 
+Welcome to the Azure Training Program! Today we'll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
+
+### Day 1️⃣: Azure Fundamentals and Landing Zones
+
+- Explore Azure Landing Zones and Hub & Spoke architecture.
+- Understand general enterprise architecture in Azure.
+- Practical labs: Create vNets, VMs, and storage resources using the Azure GUI (with a clear emphasis that the GUI is read-only).
+
+## 🎬 Getting started
+
+### General prerequisites
+
+- Computer with internet access (admin rights required)
+- Microsoft authenticator app pre-installed
+- Access to [Azure Portal](https://portal.azure.com/)
+
+Installed fixed versions of the following tools:
+- Powershell 7.2.24
+- Winget v1.9.25200
+- az CLI Version 2.69.0
+- VS Code with HashiCorp Terraform extension v2.34.3 installed
+- Git version 2.48.1
+- Terraform 1.5.7
+- Azd 1.12.0
+- Dubectl v1.32.2
+- Kubctl Client Version: v1.31.4
+- Open SSL
+
+### 🧑‍🏫/🧑‍🔬 Program
+
+#### Day 1 — Azure Fundamentals
+
+- [Chapter 0 - Recommended Tools](day1/chapter-0/README.md)
+- [Chapter 1 - Theory & Lab: VNet, VMs and Azure Portal](day1/chapter-1/README.md)
+
+Day 1 challenge sequence:
+
+- [Challenge 0 - Deploy the Multi-Region Lab](day1/chapter-1/challenge/README.md)
+- [Challenge 1 - Connect with Azure Bastion](day1/chapter-1/challenge1/README.md)
+- [Challenge 2 - Build Resiliency with Load Balancer](day1/chapter-1/challenge2/README.md)
+
+## 🗑️ Clean up Azure subscription (Instructors only!)
+
+> [!CAUTION]
+> **Disclaimer for the instructors**
+
+Please remember to clean up your Azure subscription after each day. This will help you avoid unnecessary costs and keep your subscription organized.
+
+In order to clean up your Azure subscription, you can use the provided script:
+
+```bash
+./clean-up-azure-sub.sh <subscription-id>
+```
+
+## 🧑‍🤝‍🧑 Contributors
+- Hengameh Bigdeloo - [GitHub](https://github.com/hbigdeloo)
+- Demir Senturk - [GitHub](https://github.com/demirsenturk_microsoft)
+- Joerg Joess - [GitHub]()
+- Sebastian Pfaller - [GitHub]()
+- Begum Yivli - [GitHub]()
+- Berdiguly Yalymov - [GitHub]()
+# ☁️ Azure Training Sessions
+
+## ℹ️ Introduction
+
 Welcome to the Azure Training Program! Over the next six days, we'll dive into essential topics related to Microsoft Azure. Our goal is to equip you with practical skills and knowledge that you can apply in real-world scenarios.
 
 ### Day 1️⃣: Azure Fundamentals and Landing Zones
