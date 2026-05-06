@@ -1,0 +1,18 @@
+{
+    "resources": [
+        {
+            "rg_name": "exampleResourceGroup1",
+            "location": "West Europe",
+            "repo_name": "exampleRepo1",
+            "repo_desc": "Repository for exampleResourceGroup1",
+            "repo_content": "Content for exampleRepo1"
+        },
+        {
+            "rg_name": "exampleResourceGroup2",
+            "location": "East US",
+            "repo_name": "exampleRepo2",
+            "repo_desc": "Repository for exampleResourceGroup2",
+            "repo_content": "Content for exampleRepo2"
+        }
+    ]
+}

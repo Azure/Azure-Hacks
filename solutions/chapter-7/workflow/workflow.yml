@@ -1,0 +1,46 @@
+name: solution-chapter-7
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    name: Build, Validate & Deploy
+    runs-on: [os-small-amd64-linux]
+    env:
+      ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+  
+      - name: Log in with Azure CLI
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+      
+      - name: Terraform Fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config="storage_account_name=${{ vars.STORAGE_ACCOUNT_NAME }}" -backend-config="resource_group_name=${{ vars.RESOURCE_GROUP_NAME }}"          
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -var="ssh_key=${{ vars.SSH_KEY }}"
+          
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -var="ssh_key=${{ vars.SSH_KEY }}" -auto-approve
