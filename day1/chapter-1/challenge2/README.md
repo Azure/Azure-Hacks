@@ -11,11 +11,15 @@ This challenge has two parts:
 
 - Validate the existing `web1`/`web2` app behind the load balancer.
 - Deploy `vm1` and `vm2` in different availability zones.
+- Assign a public IP to each VM so you can SSH into them directly (no Bastion in this challenge).
 - Add both Linux VMs to a load balancer backend pool.
 - Verify failover by stopping one VM at a time.
 - Optional: complete composite SLA and downtime calculation.
 
 </details>
+
+> [!IMPORTANT]
+> Unlike Challenge 1 (where Bastion was used and VMs had **no** public IP), in this challenge each VM **must** have a public IP assigned so you can connect via SSH directly from your machine.
 
 ## Part 1: Test the Existing Web Application Behind the Load Balancer
 
@@ -55,14 +59,17 @@ Deploy two VMs with the following configuration:
 | Region | swedencentral |
 | Availability Options | Availability Zone |
 | Availability Zones | Zone 1 / Zone 2 |
-| Image | Ubuntu 22.04 |
+| Image | Ubuntu 22.04 (Ubuntu 24.04 or any other recent Ubuntu LTS is also fine) |
 | Security Type | Standard |
 | Size | Standard B2s |
+| Public IP | **Assign a public IP to each VM** (required for SSH access) |
+| Inbound port rules | Allow **SSH (22)** — and **HTTP (80)** for the web test below |
 
 Additional VM requirements:
 
 - Use **Premium SSD (LRS)** disks (no ultra disk compatibility).
 - Use the same virtual network for both VMs.
+- Make sure a **public IP** is assigned to each VM. Without it, you will not be able to SSH in for the next steps.
 
 <details close>
 <summary>💡 Hint</summary>
@@ -74,13 +81,18 @@ For detailed instructions, please refer to:
 
 </details>
 
-Ensure you download the SSH key for each machine.
+Ensure you download the SSH key for each machine when it is generated during VM creation.
 
-To connect to the virtual machines, use the SSH key and public IP address of each machine:
+To connect to the virtual machines, use the SSH key and the **public IP address** of each VM (visible on the VM **Overview** blade in the portal):
 
 ```bash
-ssh -i ~/Downloads/myKey.pem azureuser@10.111.12.123
+ssh -i ~/Downloads/myKey.pem azureuser@<vm-public-ip>
 ```
+
+If the SSH connection fails, verify that:
+
+- The VM has a **public IP** assigned (Challenge 1 explicitly did not assign one — this challenge does).
+- The NSG attached to the VM/subnet allows inbound **TCP 22** from your client IP.
 
 Install a web server on both VMs:
 

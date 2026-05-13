@@ -53,7 +53,7 @@ Use the following VM configuration:
 | Region | Germany West Central |
 | Availability Options | Availability Zone |
 | Availability Zone | Zone 1 or Zone 2 |
-| Image | Ubuntu 22.04 |
+| Image | Ubuntu 22.04 (Ubuntu 24.04 or any other recent Ubuntu LTS is also fine) |
 | Security Type | Standard |
 | Size | Standard B2s |
 
