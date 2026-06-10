@@ -10,7 +10,6 @@ locals {
 # Resource groups in Azure
 resource "azurerm_resource_group" "example_rg" {
   for_each = { for idx, resource in local.resources : idx => resource }
-  provider = azurerm.default
 
   name     = each.value.rg_name
   location = each.value.location
@@ -19,7 +18,6 @@ resource "azurerm_resource_group" "example_rg" {
 # GitHub repositories
 resource "github_repository" "example_repo" {
   for_each = { for idx, resource in local.resources : idx => resource }
-  provider    = github.jeffreygroneberg
 
   name        = each.value.repo_name
   description = each.value.repo_desc
@@ -30,7 +28,6 @@ resource "github_repository" "example_repo" {
 # README files in GitHub repositories
 resource "github_repository_file" "readme" {
   for_each = { for idx, resource in local.resources : idx => resource }
-  provider            = github.jeffreygroneberg
 
   repository          = github_repository.example_repo[each.key].name
   file                = "README.md"

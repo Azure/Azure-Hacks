@@ -1,5 +1,13 @@
 # Providers
 
+> [!IMPORTANT]
+> **This challenge is OPTIONAL** because it requires a personal GitHub
+> account with a Personal Access Token. If you don't have one, skip
+> this folder and continue with
+> [../03_variables](../03_variables/README.md). The provider-aliases
+> idea is also covered in the workshop slides, so you won't miss the
+> concept.
+
 ## Overview
 
 This Terraform configuration sets up basic Azure infrastructure with a a resource group and a github repository.

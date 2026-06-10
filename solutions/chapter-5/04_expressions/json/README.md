@@ -1,25 +1,27 @@
-# for_each
+# JSON-driven resources
 
 > [!IMPORTANT]
 > **This challenge is OPTIONAL** because it requires a personal GitHub
 > account with a Personal Access Token. If you don't have one, skip
 > this folder and continue with
-> [../../05_state](../../05_state/README.md). The `for_each` pattern
-> shown here is also used elsewhere in the workshop, so you won't miss
-> the concept.
+> [../../05_state](../../05_state/README.md). The `jsondecode` +
+> `for_each` pattern is straightforward to read through even without
+> running it.
 
 ## Overview
 
-This Terraform module shows how to use the `for_each` expression to
-create **N** resources from a single resource block. The number of
-resources is controlled by the input variable `resource_count`
-(default: `6`).
+This Terraform module shows how to read a **JSON configuration file**
+and use it as the source of truth for `for_each`-driven resources.
 
-For each iteration we create:
+`conf/config.json` is a small list of objects. For every object in that
+list we create:
 
-- an Azure **resource group** named `exampleResourceGroup-<n>`
-- a **GitHub repository** named `exampleRepo-<n>`
-- a `README.md` **file** inside that repository
+- an Azure **resource group** in the specified location
+- a **GitHub repository** with the specified name + description
+- a `README.md` **file** inside that repository with the specified content
+
+Add or remove an entry in `conf/config.json` and re-run `terraform
+apply` to scale the deployment up or down — no `.tf` change required.
 
 ## Prerequisites
 
@@ -71,7 +73,23 @@ export GITHUB_OWNER="your-github-username"
 > Never commit your PAT to git. Setting it through env vars (as above)
 > is the safe way.
 
-## 2. Deploy
+## 2. Inspect the JSON
+
+Open [`conf/config.json`](./conf/config.json). Each entry has five
+fields — feel free to change the names so they don't collide with
+something already in your account:
+
+```json
+{
+  "rg_name": "exampleResourceGroup1",
+  "location": "West Europe",
+  "repo_name": "exampleRepo1",
+  "repo_desc": "Repository for exampleResourceGroup1",
+  "repo_content": "Content for exampleRepo1"
+}
+```
+
+## 3. Deploy
 
 > [!CAUTION]
 > Always destroy your environment at the end so you start the next
@@ -83,14 +101,7 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-Want a different number of resources? Override the variable on the
-command line:
-
-```pwsh
-terraform apply -auto-approve -var "resource_count=3"
-```
-
-## 3. Destroy
+## 4. Destroy
 
 ```pwsh
 terraform destroy -auto-approve
@@ -100,13 +111,8 @@ terraform destroy -auto-approve
 
 - **`Error: GET https://api.github.com/...: 401 Bad credentials`** —
   your `GITHUB_TOKEN` is missing, expired, or lacks the `repo` scope.
-- **`Error: name already exists on this account`** — a previous run
-  left repos behind. Either delete them in the GitHub UI or run
-  `terraform destroy` from the previous state.
+- **`Error: name already exists on this account`** — a GitHub repo
+  with that name already exists. Either delete it or edit
+  `conf/config.json` to use a unique name.
 - **`Error: building AzureRM Client: obtain subscription`** — you
   forgot `ARM_SUBSCRIPTION_ID` or `az login`.
-
-
-
-
-

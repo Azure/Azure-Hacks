@@ -36,6 +36,12 @@ In addition to this it showcases the usage of tfvars files to provide the values
 3. Choose on of the provided tfvars files and reference it when running the `terraform plan` and `terraform apply` commands by using the `-var-file` parameter (eg `terraform apply -var-file=envs/europe.tfvars`).
 4. Destroy the resources when you're done: `terraform destroy -var-file=envs/europe.tfvars`.
 
+> [!NOTE]
+> **PowerShell users**: PowerShell splits `-var-file=envs/europe.tfvars`
+> at the `=` sign and Terraform replies with `Too many command line
+> arguments`. Wrap the whole flag in quotes:
+> `terraform apply "-var-file=envs/europe.tfvars"`.
+
 ### Using the default tfvars file
 
 1. Run `az login` to authenticate with your Azure account.
