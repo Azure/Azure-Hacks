@@ -1,6 +1,1 @@
-# Define the number of resources
-variable "resource_count" {
-  description = "Number of resource groups and repositories to create"
-  type        = number
-  default     = 6
-}
+# This challenge is driven entirely by conf/config.json — no input variables needed.

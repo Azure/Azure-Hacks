@@ -1,23 +1,14 @@
-
-# Generate a random integer
+# Random suffix so two participants can run this lab side-by-side
+# without bumping into the same resource group name.
 resource "random_integer" "rg_suffix" {
   min = 1000
   max = 9999
 }
-# Locals to add prefix to resource group name
-locals {
-  prefix = "rg"
-}
 
-# Final resource group name as local
 locals {
+  prefix              = "rg"
   resource_group_name = "${local.prefix}-${var.resource_group_name}-${random_integer.rg_suffix.result}"
 }
-
-# best practice is to lowercase the resource group name with the built-in lower() function
-# locals {
-#   resource_group_name = lower("${local.prefix}-${var.resource_group_name}")
-# }
 
 resource "azurerm_resource_group" "rg" {
   name     = local.resource_group_name

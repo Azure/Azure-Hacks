@@ -111,14 +111,28 @@ terraform plan -generate-config-out=generated.tf
 ```
 
 Terraform writes a fully-populated `azurerm_storage_account.imported`
-block to `generated.tf`. Open it and clean it up:
+block to `generated.tf`. Open it and clean it up — `apply` will fail
+otherwise because the generator emits a few invalid defaults:
 
-- Remove computed-only attributes if you want.
-- The generator currently writes `retention_policy_days = 0` and
-  `change_feed_retention_in_days = 0` inside `blob_properties` and
-  `queue_properties`. Both fail validation (valid range is 1+). Either
-  set them to a sensible value (e.g. `1`) or delete those nested blocks
-  entirely if you don't need them.
+- **Delete the whole `blob_properties { ... }`, `queue_properties { ... }`
+  and `share_properties { ... }` blocks** if you don't need them. The
+  generator writes `retention_policy_days = 0` inside them, which the
+  provider rejects (`expected ... to be in the range (1 - 365), got 0`).
+- (Optional) bump `min_tls_version` from `TLS1_0` to `TLS1_2`.
+
+The cleaned-up block can be as small as:
+
+```hcl
+resource "azurerm_storage_account" "imported" {
+  name                     = "<your storage account name>"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  account_kind             = "StorageV2"
+  min_tls_version          = "TLS1_2"
+}
+```
 
 ### 5. Apply the import
 

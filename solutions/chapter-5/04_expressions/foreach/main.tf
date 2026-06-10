@@ -22,7 +22,10 @@ resource "github_repository" "example_repo" {
   auto_init   = true
 }
 
-# README files in GitHub repositories
+# README files in GitHub repositories.
+# The reference to `github_repository.example_repo[each.key].name`
+# already creates an implicit dependency on the repo, so no explicit
+# depends_on is needed.
 resource "github_repository_file" "readme" {
   for_each = { for idx in local.indexes : idx => idx }
 
@@ -31,5 +34,4 @@ resource "github_repository_file" "readme" {
   overwrite_on_create = true
   content             = "Content for exampleRepo-${each.key}"
   branch              = "main"
-  depends_on          = [github_repository.example_repo]
 }

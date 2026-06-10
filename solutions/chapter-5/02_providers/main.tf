@@ -1,31 +1,32 @@
+# Short random suffix so participants don't collide on resource group
+# and repository names.
+resource "random_pet" "id" {
+  length    = 2
+  separator = "-"
+}
 
 # Resource group in Azure
 resource "azurerm_resource_group" "example_rg" {
   provider = azurerm.default
-  name     = "exampleResourceGroup"
+  name     = "rg-providers-${random_pet.id.id}"
   location = "West Europe"
 }
 
-# GitHub repository
+# GitHub repository (same name as the resource group)
 resource "github_repository" "example_repo" {
-  provider    = github.jeffreygroneberg
+  provider    = github.demo
   name        = azurerm_resource_group.example_rg.name
-  description = "An example repository managed by Terraform with the same name as the Azure Resource Group"
+  description = "Example repo managed by Terraform, same name as the Azure resource group."
   visibility  = "private"
-  auto_init = true
+  auto_init   = true
 }
 
 resource "github_repository_file" "readme" {
-  provider            = github.jeffreygroneberg
+  provider            = github.demo
   repository          = github_repository.example_repo.name
   file                = "README.md"
   overwrite_on_create = true
   content             = "example content"
   branch              = "main"
-  depends_on          = [github_repository.example_repo]
 }
-
-
-
-
 

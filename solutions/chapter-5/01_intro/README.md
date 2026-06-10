@@ -1,28 +1,57 @@
-# Azure Infrastructure Deployment with Terraform
+# 01 — Intro: your first Terraform deployment on Azure
 
-## Overview
+> **Level:** Beginner · **Time:** ~5 min
 
-This Terraform configuration sets up basic Azure infrastructure with a a resource group.
+A "hello world" for Terraform on Azure. You will deploy **one resource
+group** and immediately destroy it again. The goal is just to confirm
+that Terraform, the Azure CLI and your subscription are wired up
+correctly before moving on to the next challenges.
 
 ## Prerequisites
 
-- An Azure account
-- [Terraform](https://www.terraform.io/downloads.html) installed on your local machine
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed on your local machine
+- An Azure subscription you can deploy into
+- [Terraform](https://www.terraform.io/downloads.html) installed
+  (`terraform version` works in your shell)
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
+  installed (`az version` works in your shell)
 
-## Configuration Details
+## Deploy
 
-- **Resource Group**: A resource group named `example-resources` located in `West Europe`.
+```pwsh
+az login
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
 
-## Deployment Steps
+After apply, you should see an output similar to:
 
-1. Clone this repository to your local machine (if not already done). **Careful: forking the repository might be the better option**
-2. Open a terminal window and navigate to the root of the cloned repository.
-3. Run `az login` to authenticate with your Azure account.
-4. Run `terraform init` to initialize the Terraform configuration.
-5. Run `terraform plan` to view the resources that will be created.
-6. Run `terraform apply` to create the resources.
-7. Run `terraform destroy` to delete the resources when you're done.
+```
+resource_group_name = "rg-intro-clever-puma"
+```
 
+You can verify it exists with:
 
+```pwsh
+az group show -n (terraform output -raw resource_group_name) -o table
+```
 
+## Destroy
+
+> [!CAUTION]
+> Always destroy after each challenge so you start the next one with a
+> clean slate (and no surprise bills).
+
+```pwsh
+terraform destroy -auto-approve
+```
+
+## What this teaches you
+
+- The `terraform init / plan / apply / destroy` workflow.
+- That `azurerm` reuses your `az login` credentials — no extra config
+  needed.
+- That `random_pet` is the easiest way to give resources unique names
+  so multiple participants don't collide.
+
+**[< back to Chapter 5 solutions](../README.md)**

@@ -1,18 +1,12 @@
-# Configure the Azure Provider
+# Default Azure provider — credentials come from `az login`.
 provider "azurerm" {
   features {}
   alias = "default"
 }
 
-# Configure the GitHub Provider
+# GitHub provider — credentials come from environment variables
+# (GITHUB_TOKEN and GITHUB_OWNER), so the PAT never lands in source
+# control. See the README for how to export them.
 provider "github" {
-
-  # Personal Access Token for GitHub. You can get this from your GitHub account settings. 
-  # Make sure to keep this secure and not share it with anyone.    
-  token = "github_pat_///"
-
-  owner = "jeffreygroneberg"
-  # Owner of the GitHub repository
-  alias = "jeffreygroneberg"
-  
+  alias = "demo"
 }

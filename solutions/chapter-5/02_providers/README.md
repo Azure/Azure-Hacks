@@ -1,46 +1,98 @@
-# Providers
+# 02 — Multiple providers with aliases
 
-> [!IMPORTANT]
-> **This challenge is OPTIONAL** because it requires a personal GitHub
-> account with a Personal Access Token. If you don't have one, skip
-> this folder and continue with
-> [../03_variables](../03_variables/README.md). The provider-aliases
-> idea is also covered in the workshop slides, so you won't miss the
-> concept.
+> **Level:** Beginner · **Time:** ~10 min
+> **OPTIONAL** — requires a personal GitHub account + Personal Access Token.
 
-## Overview
+This challenge shows how a single Terraform configuration can talk to
+**two different providers at once** (`azurerm` and `github`), and how
+**provider aliases** let you address them explicitly. We create:
 
-This Terraform configuration sets up basic Azure infrastructure with a a resource group and a github repository.
-You need a PAT from your Github account to authenticate with the Github provider: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+- one Azure **resource group**
+- one **GitHub repository** with the same name
+- one `README.md` **file** inside that repository
 
-The token needs the following permissions:
-- Read and Write on your repositories 
-
-Careful with this token. It is a secret and should be treated as such and not published or shared.
+> [!NOTE]
+> Skip this folder if you don't have a personal GitHub account / PAT and
+> jump to [03_variables](../03_variables/README.md). The provider-alias
+> concept is also covered in the workshop slides.
 
 ## Prerequisites
 
-- An Azure account
-- [Terraform](https://www.terraform.io/downloads.html) installed on your local machine
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed on your local machine
+- An Azure subscription, signed in via `az login`
+- [Terraform](https://www.terraform.io/downloads.html) >= 1.5
+- A [GitHub account](https://github.com) and a **Personal Access Token**
+  with the `repo` scope:
+  1. Open <https://github.com/settings/tokens>
+  2. **Generate new token** → **Generate new token (classic)**
+  3. Name it (e.g. `azure-hacks`), set an expiry, tick **`repo`**
+  4. **Copy the value** — you will not see it again
 
-## Configuration Details
+## 1. Authenticate
 
-- **Resource Group**: A resource group named `exampleResourceGroup` located in `West Europe`.
-- **Github Repository**: A github repository named the same like your resource group located in your github account.
+### Azure
 
-> [!CAUTION] 
-> The Github provider requires a Personal Access Token (PAT) to authenticate with Github. Please create a PAT and store it in a secure location. Do not share or publish the PAT. You also need to provide a organisation.
+```pwsh
+az login
+$env:ARM_SUBSCRIPTION_ID = (az account show --query id -o tsv)
+```
 
-## Deployment Steps
+```bash
+az login
+export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+```
 
-1. Clone this repository to your local machine (if not already done). **Careful: forking the repository might be the better option**
-2. Open a terminal window and navigate to the root of the cloned repository.
-3. Run `az login` to authenticate with your Azure account.
-4. Run `terraform init` to initialize the Terraform configuration.
-5. Run `terraform plan` to view the resources that will be created.
-6. Run `terraform apply` to create the resources.
-7. Run `terraform destroy` to delete the resources when you're done.
+### GitHub
 
+The `github` provider reads its credentials from environment variables
+— so the PAT never ends up in any `.tf` file:
 
+```pwsh
+$env:GITHUB_TOKEN = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+$env:GITHUB_OWNER = "your-github-username"
+```
 
+```bash
+export GITHUB_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+export GITHUB_OWNER="your-github-username"
+```
+
+> [!IMPORTANT]
+> Never commit your PAT to git. Setting it through environment
+> variables (as above) is the safe way.
+
+## 2. Deploy
+
+```pwsh
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+You will end up with a resource group named `rg-providers-<pet>` in
+Azure and a private repo with the same name in your GitHub account.
+
+## 3. Destroy
+
+```pwsh
+terraform destroy -auto-approve
+```
+
+## What this teaches you
+
+- A single Terraform config can target **multiple platforms**.
+- `provider "x" { alias = "..." }` lets you declare more than one
+  configuration of the same provider and pick which one each resource
+  uses via `provider = x.alias_name`.
+- Provider credentials belong in **environment variables**, not in
+  source files.
+
+## Troubleshooting
+
+- **`401 Bad credentials`** from GitHub — `GITHUB_TOKEN` is missing,
+  expired, or lacks the `repo` scope.
+- **`name already exists on this account`** — a previous run left a
+  repo behind. Delete it in the GitHub UI or run `terraform destroy`.
+- **`obtain subscription` / `building AzureRM Client`** — you forgot
+  `az login` or `ARM_SUBSCRIPTION_ID`.
+
+**[< back to Chapter 5 solutions](../README.md)**
