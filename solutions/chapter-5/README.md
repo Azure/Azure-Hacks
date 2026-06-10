@@ -8,7 +8,7 @@ This folder acts as a small demo repository for the Terraform Basics chapter. It
 - [04_expressions](04_expressions): A minimalistic example to showcase expressions and functions. **(OPTIONAL — requires a GitHub account + PAT)**
 - [05_state](05_state): A minimalistic example to showcase state management, Terraform import and workspaces.
 - [06_import](06_import): A minimalistic example to showcase Terraform import.
-- [07_postgresql](07_postgresql): A minimal example to deploy an Azure Database for PostgreSQL Flexible Server (public endpoint). **(takes ~7 min to provision)**
+- [07_postgresql](07_postgresql): **Beginner challenge** — write Terraform from scratch to deploy an Azure Database for PostgreSQL Flexible Server (public endpoint). Includes a step-by-step walkthrough plus a clone-and-deploy fallback. **(takes ~7 min to provision)**
 
 > [!NOTE]
 > Challenges marked **OPTIONAL** create resources in GitHub in addition
