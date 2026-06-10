@@ -34,8 +34,8 @@ You will practice the building blocks from earlier challenges:
 > destroy` takes about the same (the resource group deletion blocks
 > until the database is fully torn down). Both commands will look like
 > they hang — they aren't, the Azure control plane is just slow.
-> **Destroy as soon as you are done** — the smallest tier still costs
-> around **$13–15/month** if you leave it running.
+> **Destroy as soon as you are done** so the server doesn't keep
+> running (and billing) in the background.
 
 ---
 
