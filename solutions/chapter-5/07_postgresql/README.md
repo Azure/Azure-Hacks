@@ -63,6 +63,21 @@ You will practice the building blocks from earlier challenges:
   az provider register --namespace Microsoft.DBforPostgreSQL --wait
   ```
 
+> [!IMPORTANT]
+> **If your tenant requires Multi-Factor Authentication (MFA), a plain
+> `az login` is not enough.** A normal sign-in can hand Terraform a
+> password-only token, and every create/update will then fail with:
+>
+> ```
+> Status=401 Code="RequestDisallowedByAzure"
+> ... you tried to create, update or delete Azure resources without
+> authenticating through MFA. (https://aka.ms/MFAforAzure)
+> ```
+>
+> If you hit this, see
+> [Troubleshooting → MFA / RequestDisallowedByAzure](#mfa--requestdisallowedbyazure)
+> below for the one-time fix.
+
 ---
 
 ## Path A — Build it yourself
@@ -374,6 +389,75 @@ terraform destroy -auto-approve
 
 This deletes all 4 (or 3 if you skipped the firewall rule) resources.
 Expect another **~7 minutes** of waiting.
+
+---
+
+## Troubleshooting
+
+### MFA / `RequestDisallowedByAzure`
+
+**Symptom:** `terraform apply` fails immediately when creating the
+resource group with:
+
+```
+Status=401 Code="RequestDisallowedByAzure"
+Message="... you tried to create, update or delete Azure resources
+without authenticating through MFA ... https://aka.ms/MFAforAzure"
+```
+
+**Why:** Your tenant enforces MFA via Conditional Access, but the token
+the Azure CLI gave Terraform was obtained with a password only. You can
+confirm this — the token's `amr` (authentication methods) claim will show
+just `pwd` instead of `pwd ... mfa`.
+
+**Fix (one-time):** Clear the cached tokens and sign in again so the
+login actually performs MFA, then verify the claim before re-running
+Terraform.
+
+```powershell
+# 1. Remove any cached (non-MFA) tokens
+az account clear
+
+# 2. Sign in again — complete the MFA prompt in the browser.
+#    Replace <tenant-id> with your tenant's GUID (or use the *.onmicrosoft.com domain).
+az login --tenant <tenant-id>
+
+# 3. Re-select your subscription
+az account set --subscription <subscription-id>
+```
+
+> [!TIP]
+> If `az login` still returns a password-only token (some Conditional
+> Access setups require it), the CLI prints the exact command to force
+> MFA — it includes a `--claims-challenge "..."` value. Copy and run that
+> command as-is. After signing in, you can verify MFA succeeded:
+>
+> ```powershell
+> az account get-access-token --query accessToken -o tsv |
+>   ForEach-Object { $_.Split('.')[1] } |
+>   ForEach-Object { $p=$_; switch ($p.Length % 4) { 2 {$p+='=='} 3 {$p+='='} }; $p } |
+>   ForEach-Object { [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_.Replace('-','+').Replace('_','/'))) } |
+>   ConvertFrom-Json | Select-Object -ExpandProperty amr
+> ```
+>
+> The output should include `mfa`. Once it does, re-run `terraform apply`.
+
+### `psql` connects but times out / `TcpTestSucceeded : False`
+
+If you opened the firewall rule but still can't reach port `5432`, your
+**local network is probably blocking outbound 5432** (common on corporate
+networks / VPNs). The server itself is fine — verify it from the control
+plane instead of the data plane:
+
+```powershell
+az postgres flexible-server show `
+  --name (terraform output -raw postgres_server_name) `
+  --resource-group (terraform output -raw resource_group_name) `
+  --query "{name:name, state:state}" -o table
+```
+
+A `state` of `Ready` means the deployment succeeded; the blocked port is
+a network/egress issue outside this lab.
 
 ---
 

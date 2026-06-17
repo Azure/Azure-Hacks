@@ -342,6 +342,52 @@ terraform destroy
 
 **Fix:** Open `C:\basic_tf\aks\main.tf`, find the `default_node_pool` block, and change `vm_size` to one of the allowed sizes listed in the error message. Recommended: `Standard_D2s_v6`. Then run `terraform apply` again.
 
+### `terraform apply` fails with `unimplemented polling status "Unknown"`
+
+**Error:** During cluster creation, after several minutes:
+```
+Error: creating Kubernetes Cluster ...: polling after CreateOrUpdate:
+internal-error: unimplemented polling status "Unknown"
+```
+
+**What's happening:** This is a known mismatch between the older `azurerm`
+provider (`~>3.0`, pinned by this repo) and the newer AKS API. **The
+cluster is actually being created in Azure** — Terraform just fails to
+track the long-running operation, so it never saves the cluster to state.
+
+**Fix:** Wait for the cluster to finish, then import it into state.
+
+```powershell
+# 1. Find your cluster's resource group and name (from main.tf / the error message)
+az aks list --query "[].{name:name, rg:resourceGroup, state:provisioningState}" -o table
+
+# 2. Wait until provisioningState shows "Succeeded" (re-run the line above to check)
+
+# 3. Get the resource ID and FIX THE CASING.
+#    az returns ".../resourcegroups/..." but Terraform requires ".../resourceGroups/...".
+$id = (az aks show -g <resource-group> -n <cluster-name> --query id -o tsv) -replace 'resourcegroups','resourceGroups'
+
+# 4. Import the cluster into Terraform state
+terraform import azurerm_kubernetes_cluster.k8s "$id"
+```
+
+After the import, `terraform plan` should show no (or only trivial)
+changes, and you can continue with Step 4. Your cluster is fully usable.
+
+### `Reference to undeclared resource` / stale `terraform.tfstate`
+
+If the `aks/` folder still has a `terraform.tfstate` from a previous run
+in a different subscription, Terraform may try to manage resources that no
+longer exist. If `az group exists -n <rg>` returns `false` but state still
+lists the cluster, back up and reset the state:
+
+```powershell
+cd C:\basic_tf\aks
+Move-Item terraform.tfstate terraform.tfstate.bak -Force
+terraform init
+terraform apply
+```
+
 ### Terraform state lock error
 
 **Error:** `Error acquiring the state lock` or `The process cannot access the file because another process has locked a portion of the file`
