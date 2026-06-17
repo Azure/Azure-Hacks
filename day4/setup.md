@@ -22,6 +22,20 @@ az account set --subscription <your-subscription-id>
 az account show --query "{name:name, id:id}" -o table
 ```
 
+> [!IMPORTANT]
+> **If your tenant requires MFA** and your Azure commands later fail with
+> `RequestDisallowedByAzure` / `https://aka.ms/MFAforAzure`, your sign-in
+> handed out a password-only token. Fix it once with:
+>
+> ```powershell
+> az account clear
+> az login --tenant <tenant-id>   # complete the MFA prompt in the browser
+> az account set --subscription <your-subscription-id>
+> ```
+>
+> If `az login` still doesn't trigger MFA, run the `az login ... --claims-challenge "..."`
+> command the CLI prints — it forces the MFA step.
+
 ---
 
 ## 2. Docker Desktop
@@ -39,6 +53,21 @@ Download and install from: https://docs.docker.com/desktop/install/windows-insta
 > If you see an error like "cannot install the Intel (x64) version on ARM64 Windows", download the ARM64 installer instead.
 
 > After installation, you may need to restart your computer. Docker Desktop must be running for `docker` commands to work.
+
+> [!IMPORTANT]
+> **Start the Docker engine before running any `docker` command.** Launch
+> **Docker Desktop** from the Start Menu and wait until the whale icon in
+> the system tray says *"Docker Desktop is running"* (this can take 30–60
+> seconds the first time). If you skip this you'll see:
+>
+> ```
+> failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine ...
+> the system cannot find the file specified
+> ```
+>
+> That error just means the engine hasn't finished starting — wait a
+> moment and try again. You can confirm the engine is ready with
+> `docker info` (it exits cleanly once running).
 
 ### Verify
 
