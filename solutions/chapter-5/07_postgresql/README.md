@@ -64,8 +64,13 @@ You will practice the building blocks from earlier challenges:
   ```
 
 > [!IMPORTANT]
-> **If your tenant requires Multi-Factor Authentication (MFA), a plain
-> `az login` is not enough.** A normal sign-in can hand Terraform a
+> **This lab requires Multi-Factor Authentication (MFA).** Before you
+> start, register an MFA method for your account at
+> **<https://aka.ms/mfasetup>** (you'll need the Microsoft Authenticator
+> app or a phone). Do this once, up front — it takes a minute and keeps
+> you from being interrupted partway through the exercise.
+>
+> Even after registering, a plain `az login` may still hand Terraform a
 > password-only token, and every create/update will then fail with:
 >
 > ```
@@ -381,6 +386,122 @@ SELECT version();
 
 Type `\q` to quit.
 
+### Step 7b — (Optional) Try some SQL
+
+Still at the `postgres=>` prompt? Here are a few beginner-friendly
+examples that take you from "it connects" to "it's a real database".
+
+> [!TIP]
+> Commands that start with a backslash (`\l`, `\dt`, `\d`) are **psql
+> meta-commands**, not SQL — they don't need a semicolon. Everything else
+> is SQL and ends with `;`. Run `\x` once to switch wide results to a
+> readable vertical layout (great for a projector); run it again to turn
+> it off.
+
+**Where am I connected?**
+
+```sql
+SELECT current_database(), current_user, inet_server_addr();
+```
+
+```text
+\conninfo      -- connection details
+\l             -- list databases
+\du            -- list roles / users
+```
+
+**Create a table and insert rows:**
+
+```sql
+CREATE TABLE attendees (
+    id     SERIAL PRIMARY KEY,
+    name   TEXT NOT NULL,
+    city   TEXT,
+    joined DATE DEFAULT CURRENT_DATE
+);
+
+INSERT INTO attendees (name, city) VALUES
+    ('Ada Lovelace', 'London'),
+    ('Alan Turing',  'Manchester'),
+    ('Grace Hopper', 'New York');
+```
+
+**Query it:**
+
+```sql
+SELECT * FROM attendees;
+SELECT city, COUNT(*) AS people FROM attendees GROUP BY city ORDER BY people DESC;
+SELECT * FROM attendees WHERE city = 'London';
+```
+
+**Update and delete:**
+
+```sql
+UPDATE attendees SET city = 'Cambridge' WHERE name = 'Ada Lovelace';
+DELETE FROM attendees WHERE name = 'Alan Turing';
+SELECT * FROM attendees;
+```
+
+**Inspect the table structure, then clean up:**
+
+```text
+\dt              -- the attendees table now shows up
+\d attendees     -- columns, types, keys
+```
+
+```sql
+DROP TABLE attendees;
+```
+
+Type `\q` to quit when you're done.
+
+### Step 7c — (Alternative) Connect from Visual Studio Code
+
+Prefer a graphical client over the `psql` command line? The official
+**PostgreSQL** extension for VS Code gives you a connection browser and a
+SQL editor with a results grid — handy for demos.
+
+1. **Install the extension.** In VS Code, open the Extensions sidebar
+   (`Ctrl+Shift+X`), search for **PostgreSQL** (publisher: Microsoft,
+   id `ms-ossdata.vscode-pgsql`), and click **Install**. Or from a
+   terminal:
+
+   ```powershell
+   code --install-extension ms-ossdata.vscode-pgsql
+   ```
+
+2. **Grab your connection values** from the Terraform outputs:
+
+   ```powershell
+   terraform output -raw postgres_fqdn              # host
+   terraform output -raw postgres_admin_login       # user (pgadmin)
+   terraform output -raw postgres_admin_password    # password
+   ```
+
+3. **Add a connection.** Click the **PostgreSQL** icon in the Activity
+   Bar, then **+ Add Connection** and fill in:
+
+   | Field | Value |
+   |---|---|
+   | Server name / Host | the `postgres_fqdn` output (e.g. `pg-xxxx.postgres.database.azure.com`) |
+   | Authentication type | Password |
+   | User name | `pgadmin` (the `postgres_admin_login` output) |
+   | Password | the `postgres_admin_password` output |
+   | Database | `postgres` |
+   | Port | `5432` |
+   | SSL / Encrypt | **Require** (Azure PostgreSQL enforces TLS) |
+
+4. **Connect.** Expand the server in the tree to browse Databases →
+   Schemas → Tables. Right-click the connection and choose
+   **New Query**, then run the same statements from Step 7b — results
+   appear in a grid below the editor.
+
+> [!NOTE]
+> The same firewall rule from Step 7 applies: VS Code connects from your
+> workstation, so your `client_ip` must be allowed. If the connection
+> times out, confirm your public IP hasn't changed and re-run
+> `terraform apply -var "client_ip=<your-ip>"`.
+
 ### Step 8 — Destroy
 
 ```powershell
@@ -459,6 +580,45 @@ az postgres flexible-server show `
 A `state` of `Ready` means the deployment succeeded; the blocked port is
 a network/egress issue outside this lab.
 
+### `MissingSubscriptionRegistration` for `Microsoft.DBforPostgreSQL`
+
+Run the registration command in [Prerequisites](#prerequisites) and wait
+a few minutes before retrying `terraform apply`.
+
+### `AvailabilityZoneNotAvailable: Availability zone '1' isn't available`
+
+Your subscription has no quota in that zone in the chosen region. This
+config does **not** hardcode a zone for that reason — Azure picks one
+automatically. If you ever pin `zone = "1"` manually and see this error,
+either remove the line or try zone `2` / `3`.
+
+### `The location '...' is not accepting creation of new ... Flexible Server`
+
+The region temporarily has no capacity for the B-series. Override the
+location:
+
+```powershell
+terraform apply -auto-approve -var "location=North Europe"
+```
+
+### `InvalidParameterValue: ... administrator_login ... reserved`
+
+`admin`, `azure_superuser`, `root`, etc. are not allowed. The default
+`pgadmin` is safe; if you change it, avoid those keywords.
+
+### `client_ip must be empty or a plain IPv4 address`
+
+Your IP-lookup command returned something other than a plain IPv4 string
+(most commonly an HTML page from `ifconfig.me`). Use
+`https://api.ipify.org` as shown in Step 7.
+
+### `Error acquiring the state lock`
+
+A previous `terraform` process is still running (e.g. the long apply
+hasn't finished). Wait for it to exit, then retry. As a last resort:
+`terraform force-unlock <LOCK_ID>` — but only if you are sure no other
+apply is in progress.
+
 ---
 
 ## Path B — Clone the solution and deploy
@@ -497,48 +657,6 @@ terraform destroy -auto-approve
   is ever called.
 - Some Azure resources are **slow** (5–8 min). Plan demos accordingly
   and always `destroy` to avoid surprise bills.
-
----
-
-## Troubleshooting
-
-**`MissingSubscriptionRegistration` for `Microsoft.DBforPostgreSQL`**
-Run the registration command in [Prerequisites](#prerequisites) and
-wait a few minutes before retrying `terraform apply`.
-
-**`AvailabilityZoneNotAvailable: Availability zone '1' isn't available`**
-Your subscription has no quota in that zone in the chosen region. This
-config does **not** hardcode a zone for that reason — Azure picks one
-automatically. If you ever pin `zone = "1"` manually and see this
-error, either remove the line or try zone `2` / `3`.
-
-**`The location '...' is not accepting creation of new ... Flexible Server`**
-The region temporarily has no capacity for the B-series. Override the
-location:
-
-```powershell
-terraform apply -auto-approve -var "location=North Europe"
-```
-
-**`InvalidParameterValue: ... administrator_login ... reserved`**
-`admin`, `azure_superuser`, `root`, etc. are not allowed. The default
-`pgadmin` is safe; if you change it, avoid those keywords.
-
-**`client_ip must be empty or a plain IPv4 address`**
-Your IP-lookup command returned something other than a plain IPv4
-string (most commonly an HTML page from `ifconfig.me`). Use
-`https://api.ipify.org` as shown in Step 7.
-
-**Apply succeeded but `psql` times out**
-Your IP isn't in the firewall. Re-run Step 7 with the right `client_ip`,
-or double-check that your network doesn't egress through a different
-public address than `api.ipify.org` reports.
-
-**`Error acquiring the state lock`**
-A previous `terraform` process is still running (e.g. the long apply
-hasn't finished). Wait for it to exit, then retry. As a last resort:
-`terraform force-unlock <LOCK_ID>` — but only if you are sure no other
-apply is in progress.
 
 ---
 
