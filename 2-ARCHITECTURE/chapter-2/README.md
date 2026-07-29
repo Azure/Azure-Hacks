@@ -61,11 +61,21 @@ The application code for the API and web components can be found in the followin
 
 Run the ``azd auth login`` command and azd launches a browser for you to complete the sign-in process:
 
-    azd auth login
+```bash
+azd auth login
+```
+
+Change into the project directory that `azd init` created:
+
+```bash
+cd <name_of_your_environment>
+```
 
 Provision and deploy the resources to Azure. Run the following command:
 
-    azd up
+```bash
+azd up
+```
 
  Select your training subscription - Terminal Input:
 
