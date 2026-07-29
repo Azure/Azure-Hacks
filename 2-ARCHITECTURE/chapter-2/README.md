@@ -61,11 +61,21 @@ The application code for the API and web components can be found in the followin
 
 Run the ``azd auth login`` command and azd launches a browser for you to complete the sign-in process:
 
-    azd auth login
+```bash
+azd auth login
+```
+
+Change into the project directory that `azd init` created:
+
+```bash
+cd <name_of_your_environment>
+```
 
 Provision and deploy the resources to Azure. Run the following command:
 
-    azd up
+```bash
+azd up
+```
 
  Select your training subscription - Terminal Input:
 
@@ -183,6 +193,50 @@ az webapp restart -n $API -g $RG
 ```
 
 Refresh the browser — the TODO items should now load.
+
+</details>
+
+<details>
+<summary>⚠️ Troubleshooting - <code>azd up</code> fails on Key Vault (403 ForbiddenByConnection)</summary>
+
+### Terraform apply fails writing the Key Vault secret?
+
+If `azd up` fails with an error like:
+
+```
+Error: ... Secret "AZURE-COSMOS-CONNECTION-STRING" ... StatusCode=403 Code="Forbidden"
+Message="Public network access is disabled ..." InnerError={"code":"ForbiddenByConnection"}
+...
+ERROR: error executing step command 'provision': ... failed running terraform apply (exit code: 1)
+```
+
+An Azure Policy in your environment is forcing the Key Vault's public network access to **Disabled**, so Terraform cannot write the Cosmos DB connection string from your machine. Create a policy **exemption** for your subscription so the vault can be created with public access enabled.
+
+> 💡 This requires `Microsoft.Authorization/policyExemptions/write` (Resource Policy Contributor or Owner) on the subscription. If you don't have it, ask an administrator to create the exemption for you.
+>
+> 💡 Replace `<subscription-id>`, `<management-group-id>` and `<policy-assignment-name>` with the values for your environment.
+
+**Step 1** — Create the exemption (once per subscription, before `azd up`)
+
+```powershell
+az policy exemption create --name day5-kv-net-exemption --policy-assignment "/providers/Microsoft.Management/managementGroups/<management-group-id>/providers/Microsoft.Authorization/policyAssignments/<policy-assignment-name>" --exemption-category Waiver --scope "/subscriptions/<subscription-id>"
+```
+
+**Step 2** — If a previous run already created the Key Vault, re-enable public access (it now sticks)
+
+```powershell
+$RG = "rg-<env-name>"
+$KV = az keyvault list -g $RG --query "[0].name" -o tsv
+az keyvault update -n $KV -g $RG --public-network-access Enabled
+```
+
+**Step 3** — Run the deployment again
+
+```powershell
+azd up
+```
+
+> 💡 The exemption is scoped to the whole subscription, so it covers any resource group you create — you only need to create it once.
 
 </details>
 
